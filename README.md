@@ -1,24 +1,22 @@
-# Endcap website recreation
+# Webly portfolio
 
-A self-contained static recreation of https://endcap.design/, captured November 2, 2026. It includes the homepage and 68 linked pages, with local copies of the reference fonts, styles, images, illustrations, and interaction scripts.
+Run `npm run dev` and open http://localhost:5173. Admin: http://localhost:5173/admin/.
 
-## Preview
+The selected work contains The Quality Kitchen, JRZEES, Prompt Pop 2K26, ACM ROCS 2026, and Talent Hunt 2K26. Homepage screenshots are saved in `dist/media/projects/`. Mobile and desktop use paired cards with a full-width final project.
 
-Run `npm run dev` in this directory, then open http://localhost:5173. No dependency installation or compilation is required. All deployable files are in `dist/`.
+The header includes Services, Our work, Insights, About, and Let’s talk. The CMS manages the six published pages, five project records, theme colors, fonts, navigation, uploads, and contact inquiries.
 
-## Design and interactions
+Use the admin to edit content, colors, fonts, navigation, project descriptions and screenshots, and inquiries. Save a draft, preview it, and publish it to the local site. Runtime data and archived legacy pages are stored in `.local/` and excluded from Git.
 
-The reference's Hanken Grotesk and serif typefaces, precise spacing and responsive breakpoints, hero word entrances, scroll reveals, drawing animations, project hover cursor, process rail, word highlighting, animated statistics, FAQ disclosures, mobile navigation, and footer letter interactions are retained.
+`npm test` checks authentication, publishing, persistence, inquiries, uploads, hidden pages, and migrations. `npm run check` validates page assets and local resources.
 
-The original analytics and inquiry-submission scripts are excluded. Contact forms validate normally and save a draft in browser local storage, with an explicit message that nothing was sent. External email, telephone, and project links retain their original destinations. Links outside the 69 included pages open the reference site.
+## Vercel deployment
 
-## Files
+Import this repository into Vercel with the Other framework preset and `dist` as the output directory. `vercel.json` routes public pages and the CMS API through `api/index.mjs`, while static assets remain on the CDN.
 
-- `dist/index.html`: homepage
-- `dist/media/`: local fonts, images, styles and animation scripts
-- `dist/recreation.js`: local-only form behavior
-- `scripts/serve.mjs`: dependency-free development server
-- `scripts/recreate.py`: reproducible public asset import (requires Python and beautifulsoup4)
-- `recreation-manifest.json`: page list, asset count and download results
+Connect a **private Vercel Blob store** to the project. Vercel supplies `BLOB_READ_WRITE_TOKEN`; credentials and `.env` files must never be committed. The hosted CMS stores content, accounts, sessions, uploads, and enquiries privately. Public uploaded media is served through `/media/uploads/`. Concurrent content saves use ETags to prevent overwriting newer changes.
 
-This is a visual recreation of the reference studio's site. Its original branding, project imagery, copy and contact details are retained to match the requested reference.
+The deployed admin is `/admin/`. Its login is the existing studio administrator account. Local development continues to use `.local/`, so local and hosted edits are independent after the initial migration. The public seed contains the published design; passwords and enquiries are excluded from Git.
+
+The homepage intro follows the Accent color and animation toggle, plays once per browser session, and supports reduced motion and Skip/Escape.
+

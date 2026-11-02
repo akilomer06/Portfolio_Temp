@@ -1,0 +1,32 @@
+.webly-intro{display:none}
+html[data-webly-intro] .webly-intro{display:flex;position:fixed;inset:0;z-index:10000;flex-direction:column;justify-content:space-between;padding:clamp(24px,4vw,64px);background:var(--intro-primary);color:var(--intro-contrast);overflow:hidden;animation:webly-intro-safety 0s 5s forwards}
+.webly-intro-top,.webly-intro-bottom{display:flex;align-items:center;justify-content:space-between;gap:24px;font:600 10px/1.5 Hanken,Arial,sans-serif;letter-spacing:.13em;text-transform:uppercase}
+.webly-intro-top>span{display:flex;align-items:center;gap:10px}
+.webly-intro-top>span::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+.webly-intro-skip{border:1px solid currentColor;border-radius:0;background:transparent;color:inherit;padding:9px 13px;font:inherit;letter-spacing:inherit;text-transform:uppercase;cursor:pointer;transition:opacity .2s}
+.webly-intro-skip:hover{opacity:.6}
+.webly-intro-skip:focus-visible{outline:2px solid currentColor;outline-offset:5px}
+.webly-intro-center{position:relative;align-self:center;width:min(100%,1000px);padding:34px 0;text-align:center}
+.webly-intro-center::before,.webly-intro-center::after{content:'';position:absolute;width:13px;height:13px;border-color:currentColor;opacity:.3}
+.webly-intro-center::before{left:0;top:0;border-left:1px solid;border-top:1px solid}
+.webly-intro-center::after{right:0;bottom:0;border-right:1px solid;border-bottom:1px solid}
+.webly-intro-word{display:flex;align-items:baseline;justify-content:center;overflow:hidden;padding:0 .05em .08em;font-family:var(--display,'Endcap Grotesk',Hanken,Arial,sans-serif);font-size:clamp(72px,18vw,250px);font-weight:900;line-height:1.08;letter-spacing:-.075em}
+.webly-intro-letter{display:inline-block;transform:translateY(125%);opacity:0}
+.webly-intro-period{display:inline-block;transform:scale(0);transform-origin:50% 75%;opacity:0}
+.webly-intro-caption{margin:22px 0 0;font:500 10px/1.6 Hanken,Arial,sans-serif;letter-spacing:.15em;text-transform:uppercase;opacity:0;transform:translateY(7px)}
+.webly-intro-bottom{position:relative;padding-top:18px;opacity:.7}
+.webly-intro-track{position:absolute;top:0;left:0;right:0;height:1px;background:currentColor;opacity:.22}
+.webly-intro-progress{position:absolute;top:0;left:0;right:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left}
+html[data-webly-intro="running"] .webly-intro-letter{animation:webly-intro-letter .75s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--letter-index)*55ms + 80ms)}
+html[data-webly-intro="running"] .webly-intro-period{animation:webly-intro-period .55s cubic-bezier(.22,1,.36,1) .5s both}
+html[data-webly-intro="running"] .webly-intro-caption{animation:webly-intro-caption .5s ease .55s both}
+html[data-webly-intro="running"] .webly-intro-progress{animation:webly-intro-progress 1.25s cubic-bezier(.65,0,.35,1) both}
+html[data-webly-intro="running"] .webly-intro{animation:webly-intro-exit .65s cubic-bezier(.76,0,.24,1) 1.25s both,webly-intro-safety 0s 5s forwards}
+@keyframes webly-intro-letter{to{transform:translateY(0);opacity:1}}
+@keyframes webly-intro-period{0%{transform:scale(0);opacity:0}65%{transform:scale(1.2);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes webly-intro-caption{to{transform:translateY(0);opacity:.7}}
+@keyframes webly-intro-progress{to{transform:scaleX(1)}}
+@keyframes webly-intro-exit{to{transform:translateY(-102%);visibility:hidden}}
+@keyframes webly-intro-safety{to{visibility:hidden;pointer-events:none}}
+@media(max-width:600px){.webly-intro-bottom,.webly-intro-top{font-size:8px;letter-spacing:.1em}.webly-intro-caption{max-width:24ch;margin:20px auto 0;font-size:9px}.webly-intro-center{padding:26px 0}.webly-intro-bottom>span:last-child{display:none}}
+@media(prefers-reduced-motion:reduce){html[data-webly-intro] .webly-intro{display:none}}

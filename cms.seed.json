@@ -1,0 +1,1704 @@
+{
+  "schema": 1,
+  "settings": {
+    "siteName": "Webly",
+    "tagline": "Web & AI Studio / India",
+    "email": "hello@endcap.design",
+    "phone": "",
+    "phoneLink": "",
+    "location": "India",
+    "copyright": "© 2026 Webly Web Design",
+    "instagram": "https://www.instagram.com/endcap.design/",
+    "businessHours": "Monday–Friday, 9am–5pm",
+    "replyTime": "Within an hour during business hours"
+  },
+  "theme": {
+    "accent": "#a48fbc",
+    "paper": "#e1e0db",
+    "ink": "#181a17",
+    "muted": "#5e6258",
+    "line": "#bbbfb1",
+    "bodyFont": "Hanken",
+    "headingFont": "Endcap Grotesk",
+    "serifFont": "Fraunces",
+    "bodySize": 16,
+    "headingScale": 1,
+    "animations": true,
+    "customFonts": []
+  },
+  "navigation": [
+    {
+      "label": "Services",
+      "href": "/services/",
+      "visible": true
+    },
+    {
+      "label": "Our work",
+      "href": "/work/",
+      "visible": true
+    },
+    {
+      "label": "Insights",
+      "href": "/insights/",
+      "visible": true
+    },
+    {
+      "label": "About",
+      "href": "/about/",
+      "visible": true
+    },
+    {
+      "label": "Let’s talk",
+      "href": "/contact/",
+      "visible": true
+    }
+  ],
+  "projects": [
+    {
+      "id": "quality-kitchen",
+      "name": "The Quality Kitchen",
+      "category": "Food & ordering",
+      "url": "https://the-quality-kitchen.vercel.app/",
+      "image": "/media/projects/quality-kitchen.jpg",
+      "screen": "",
+      "alt": "The Quality Kitchen homepage screenshot",
+      "description": "A food-focused website combining editorial typography and food photography with a filterable menu, portion selection, a basket, and WhatsApp enquiries.",
+      "status": "published",
+      "featured": true,
+      "homeVisible": true,
+      "order": 0
+    },
+    {
+      "id": "jrzees",
+      "name": "JRZEES",
+      "category": "Football storefront",
+      "url": "https://www.jrzees.com/",
+      "image": "/media/projects/jrzees.jpg",
+      "screen": "",
+      "alt": "JRZEES homepage screenshot",
+      "description": "A football-jersey storefront with a dark visual identity, collection navigation, regional currency selection, product browsing, and a shopping bag.",
+      "status": "published",
+      "featured": false,
+      "homeVisible": true,
+      "order": 1
+    },
+    {
+      "id": "prompt-pop",
+      "name": "Prompt Pop 2K26",
+      "category": "Competition platform",
+      "url": "https://prompt-pop-2k26.vercel.app/",
+      "image": "/media/projects/prompt-pop.jpg",
+      "screen": "",
+      "alt": "Prompt Pop 2K26 homepage screenshot",
+      "description": "An AI prompting and design competition platform with team-code entry, a timed quiz, image recreation, a comedy bonus, logo design, and results access.",
+      "status": "published",
+      "featured": false,
+      "homeVisible": true,
+      "order": 2
+    },
+    {
+      "id": "acm-rocs",
+      "name": "ACM ROCS 2026",
+      "category": "Workshop website",
+      "url": "https://crescent-acm-2026-tan.vercel.app/",
+      "image": "/media/projects/acm-rocs.jpg",
+      "screen": "",
+      "alt": "ACM ROCS 2026 homepage screenshot",
+      "description": "A website for the ACM India research workshop at Crescent, presenting speakers, the programme, registration information, the venue, and organiser contacts.",
+      "status": "published",
+      "featured": false,
+      "homeVisible": true,
+      "order": 3
+    },
+    {
+      "id": "talent-hunt",
+      "name": "Talent Hunt 2K26",
+      "category": "Event website",
+      "url": "https://talent-hunt-2k26-five.vercel.app/",
+      "image": "/media/projects/talent-hunt.jpg",
+      "screen": "",
+      "alt": "Talent Hunt 2K26 homepage screenshot",
+      "description": "A bold Crescent CSE event website featuring 16 technical and non-technical competitions, event discovery, schedules, venues, FAQs, and coordinators.",
+      "status": "published",
+      "featured": false,
+      "homeVisible": true,
+      "order": 4
+    }
+  ],
+  "pages": [
+    {
+      "path": "/",
+      "title": "Webly | Web & AI Studio",
+      "description": "Webly creates thoughtful digital experiences. Explore selected projects and ideas from India.",
+      "heading": "WEB & AI STUDIO.",
+      "fields": [
+        {
+          "id": "p0:0",
+          "node": "p0",
+          "index": 0,
+          "value": "Webly",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p1:0",
+          "node": "p1",
+          "index": 0,
+          "value": "Menu ",
+          "group": "Page content",
+          "tag": "button"
+        },
+        {
+          "id": "p2:0",
+          "node": "p2",
+          "index": 0,
+          "value": "Projects",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p3:0",
+          "node": "p3",
+          "index": 0,
+          "value": "About",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p4:0",
+          "node": "p4",
+          "index": 0,
+          "value": "Contact",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p6:0",
+          "node": "p6",
+          "index": 0,
+          "value": "WEB",
+          "group": "WEB & AI STUDIO .",
+          "tag": "span"
+        },
+        {
+          "id": "p8:0",
+          "node": "p8",
+          "index": 0,
+          "value": "STUDIO",
+          "group": "WEB & AI STUDIO .",
+          "tag": "span"
+        },
+        {
+          "id": "p9:2",
+          "node": "p9",
+          "index": 2,
+          "value": "designed and built with care in India.",
+          "group": "WEB & AI STUDIO .",
+          "tag": "p"
+        },
+        {
+          "id": "p10:0",
+          "node": "p10",
+          "index": 0,
+          "value": "Let’s talk ",
+          "group": "WEB & AI STUDIO .",
+          "tag": "a"
+        },
+        {
+          "id": "p11:0",
+          "node": "p11",
+          "index": 0,
+          "value": "See our work",
+          "group": "WEB & AI STUDIO .",
+          "tag": "a"
+        },
+        {
+          "id": "p18:0",
+          "node": "p18",
+          "index": 0,
+          "value": "A LITTLE PAPER. A LOT OF POSSIBILITY.",
+          "group": "GOOD IDEAS, in flight.",
+          "tag": "p"
+        },
+        {
+          "id": "p19:0",
+          "node": "p19",
+          "index": 0,
+          "value": "GOOD IDEAS,",
+          "group": "GOOD IDEAS, in flight.",
+          "tag": "h2"
+        },
+        {
+          "id": "p20:0",
+          "node": "p20",
+          "index": 0,
+          "value": "in flight.",
+          "group": "GOOD IDEAS, in flight.",
+          "tag": "em"
+        },
+        {
+          "id": "p21:0",
+          "node": "p21",
+          "index": 0,
+          "value": "A STUDIO IN INDIA.",
+          "group": "GOOD IDEAS, in flight.",
+          "tag": "p"
+        },
+        {
+          "id": "p22:0",
+          "node": "p22",
+          "index": 0,
+          "value": "IDEAS WITHOUT BORDERS.",
+          "group": "GOOD IDEAS, in flight.",
+          "tag": "span"
+        },
+        {
+          "id": "p23:0",
+          "node": "p23",
+          "index": 0,
+          "value": "THE BRIEF",
+          "group": "GOOD IDEAS, in flight.",
+          "tag": "b"
+        },
+        {
+          "id": "p24:0",
+          "node": "p24",
+          "index": 0,
+          "value": "THE JOURNEY",
+          "group": "GOOD IDEAS, in flight.",
+          "tag": "b"
+        },
+        {
+          "id": "p25:0",
+          "node": "p25",
+          "index": 0,
+          "value": "THE LAUNCH",
+          "group": "GOOD IDEAS, in flight.",
+          "tag": "b"
+        },
+        {
+          "id": "p26:0",
+          "node": "p26",
+          "index": 0,
+          "value": "Small beginnings. Big possibilities.",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p27:0",
+          "node": "p27",
+          "index": 0,
+          "value": "Pause",
+          "group": "Page content",
+          "tag": "span"
+        },
+        {
+          "id": "p28:1",
+          "node": "p28",
+          "index": 1,
+          "value": "Replay",
+          "group": "Page content",
+          "tag": "button"
+        },
+        {
+          "id": "p29:0",
+          "node": "p29",
+          "index": 0,
+          "value": "Selected work",
+          "group": "SELECTED work.",
+          "tag": "p"
+        },
+        {
+          "id": "p30:0",
+          "node": "p30",
+          "index": 0,
+          "value": "SELECTED",
+          "group": "SELECTED work.",
+          "tag": "h2"
+        },
+        {
+          "id": "p31:0",
+          "node": "p31",
+          "index": 0,
+          "value": "work.",
+          "group": "SELECTED work.",
+          "tag": "em"
+        },
+        {
+          "id": "p33:0",
+          "node": "p33",
+          "index": 0,
+          "value": "Talent Hunt 2K26",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p35:0",
+          "node": "p35",
+          "index": 0,
+          "value": "A bold Crescent CSE event website featuring 16 technical and non-technical competitions, event discovery, schedules, venues, FAQs, and coordinators.",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p36:0",
+          "node": "p36",
+          "index": 0,
+          "value": "JRZEES",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p38:0",
+          "node": "p38",
+          "index": 0,
+          "value": "A football-jersey storefront with a dark visual identity, collection navigation, regional currency selection, product browsing, and a shopping bag.",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p39:0",
+          "node": "p39",
+          "index": 0,
+          "value": "Prompt Pop 2K26",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p41:0",
+          "node": "p41",
+          "index": 0,
+          "value": "An AI prompting and design competition platform with team-code entry, a timed quiz, image recreation, a comedy bonus, logo design, and results access.",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p42:0",
+          "node": "p42",
+          "index": 0,
+          "value": "ACM ROCS 2026",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p44:0",
+          "node": "p44",
+          "index": 0,
+          "value": "A website for the ACM India research workshop at Crescent, presenting speakers, the programme, registration information, the venue, and organiser contacts.",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p45:0",
+          "node": "p45",
+          "index": 0,
+          "value": "About this collection",
+          "group": "LEARNING BY building.",
+          "tag": "p"
+        },
+        {
+          "id": "p46:0",
+          "node": "p46",
+          "index": 0,
+          "value": "LEARNING BY",
+          "group": "LEARNING BY building.",
+          "tag": "h2"
+        },
+        {
+          "id": "p47:0",
+          "node": "p47",
+          "index": 0,
+          "value": "building.",
+          "group": "LEARNING BY building.",
+          "tag": "em"
+        },
+        {
+          "id": "p49:0",
+          "node": "p49",
+          "index": 0,
+          "value": "Based in India",
+          "group": "LOCAL ROOTS, global reach.",
+          "tag": "p"
+        },
+        {
+          "id": "p50:0",
+          "node": "p50",
+          "index": 0,
+          "value": "LOCAL ROOTS,",
+          "group": "LOCAL ROOTS, global reach.",
+          "tag": "h2"
+        },
+        {
+          "id": "p51:0",
+          "node": "p51",
+          "index": 0,
+          "value": "global reach.",
+          "group": "LOCAL ROOTS, global reach.",
+          "tag": "em"
+        },
+        {
+          "id": "p52:0",
+          "node": "p52",
+          "index": 0,
+          "value": "We design and build from India, collaborating with businesses across borders and time zones. Wherever you are, a good conversation is all it takes to get started.",
+          "group": "LOCAL ROOTS, global reach.",
+          "tag": "p"
+        },
+        {
+          "id": "p53:0",
+          "node": "p53",
+          "index": 0,
+          "value": "Start a conversation ",
+          "group": "LOCAL ROOTS, global reach.",
+          "tag": "a"
+        },
+        {
+          "id": "p54:0",
+          "node": "p54",
+          "index": 0,
+          "value": "Dots show the region, with India highlighted as our studio’s home base.",
+          "group": "LOCAL ROOTS, global reach.",
+          "tag": "p"
+        },
+        {
+          "id": "p55:0",
+          "node": "p55",
+          "index": 0,
+          "value": "Contact Webly",
+          "group": "LET’S talk.",
+          "tag": "p"
+        },
+        {
+          "id": "p56:0",
+          "node": "p56",
+          "index": 0,
+          "value": "LET’S",
+          "group": "LET’S talk.",
+          "tag": "h2"
+        },
+        {
+          "id": "p57:0",
+          "node": "p57",
+          "index": 0,
+          "value": "talk.",
+          "group": "LET’S talk.",
+          "tag": "em"
+        },
+        {
+          "id": "p58:0",
+          "node": "p58",
+          "index": 0,
+          "value": "Have a project idea, a collaboration, or feedback on the work? Let’s start a conversation.",
+          "group": "LET’S talk.",
+          "tag": "p"
+        },
+        {
+          "id": "p59:0",
+          "node": "p59",
+          "index": 0,
+          "value": "Let’s talk ",
+          "group": "LET’S talk.",
+          "tag": "a"
+        },
+        {
+          "id": "p60:0",
+          "node": "p60",
+          "index": 0,
+          "value": "or email ",
+          "group": "LET’S talk.",
+          "tag": "span"
+        },
+        {
+          "id": "p61:0",
+          "node": "p61",
+          "index": 0,
+          "value": "hello@endcap.design",
+          "group": "LET’S talk.",
+          "tag": "a"
+        },
+        {
+          "id": "p62:0",
+          "node": "p62",
+          "index": 0,
+          "value": "Webly",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p63:5",
+          "node": "p63",
+          "index": 5,
+          "value": "Based in ",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p64:0",
+          "node": "p64",
+          "index": 0,
+          "value": "Websites",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p67:3",
+          "node": "p67",
+          "index": 3,
+          "value": "Call ",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p68:0",
+          "node": "p68",
+          "index": 0,
+          "value": "hello@endcap.design ",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p69:0",
+          "node": "p69",
+          "index": 0,
+          "value": "(949) 424-7340",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p70:0",
+          "node": "p70",
+          "index": 0,
+          "value": "Projects",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p71:0",
+          "node": "p71",
+          "index": 0,
+          "value": "About",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p72:0",
+          "node": "p72",
+          "index": 0,
+          "value": "Contact",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p73:0",
+          "node": "p73",
+          "index": 0,
+          "value": "© 2026 Webly · Portfolio",
+          "group": "Page content",
+          "tag": "span"
+        },
+        {
+          "id": "p74:0",
+          "node": "p74",
+          "index": 0,
+          "value": "Webly",
+          "group": "Page content",
+          "tag": "div"
+        }
+      ],
+      "visible": true
+    },
+    {
+      "path": "/work/",
+      "title": "Selected work | Webly",
+      "description": "Selected digital projects spanning food, events, e-commerce, and interactive experiences.",
+      "heading": "SELECTED work.",
+      "fields": [
+        {
+          "id": "p0:0",
+          "node": "p0",
+          "index": 0,
+          "value": "Webly",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p1:0",
+          "node": "p1",
+          "index": 0,
+          "value": "Menu ",
+          "group": "Page content",
+          "tag": "button"
+        },
+        {
+          "id": "p2:0",
+          "node": "p2",
+          "index": 0,
+          "value": "Projects",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p3:0",
+          "node": "p3",
+          "index": 0,
+          "value": "About",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p4:0",
+          "node": "p4",
+          "index": 0,
+          "value": "Contact",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p6:0",
+          "node": "p6",
+          "index": 0,
+          "value": "SELECTED",
+          "group": "SELECTED work.",
+          "tag": "h1"
+        },
+        {
+          "id": "p7:0",
+          "node": "p7",
+          "index": 0,
+          "value": "work.",
+          "group": "SELECTED work.",
+          "tag": "em"
+        },
+        {
+          "id": "p10:0",
+          "node": "p10",
+          "index": 0,
+          "value": "The Quality Kitchen",
+          "group": "Page content",
+          "tag": "h2"
+        },
+        {
+          "id": "p11:0",
+          "node": "p11",
+          "index": 0,
+          "value": "A food-focused website combining editorial typography and food photography with a filterable menu, portion selection, a basket, and WhatsApp enquiries.",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p13:0",
+          "node": "p13",
+          "index": 0,
+          "value": "Talent Hunt 2K26",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p15:0",
+          "node": "p15",
+          "index": 0,
+          "value": "A bold Crescent CSE event website featuring 16 technical and non-technical competitions, event discovery, schedules, venues, FAQs, and coordinators.",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p16:0",
+          "node": "p16",
+          "index": 0,
+          "value": "JRZEES",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p18:0",
+          "node": "p18",
+          "index": 0,
+          "value": "A football-jersey storefront with a dark visual identity, collection navigation, regional currency selection, product browsing, and a shopping bag.",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p19:0",
+          "node": "p19",
+          "index": 0,
+          "value": "Prompt Pop 2K26",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p21:0",
+          "node": "p21",
+          "index": 0,
+          "value": "An AI prompting and design competition platform with team-code entry, a timed quiz, image recreation, a comedy bonus, logo design, and results access.",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p22:0",
+          "node": "p22",
+          "index": 0,
+          "value": "ACM ROCS 2026",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p24:0",
+          "node": "p24",
+          "index": 0,
+          "value": "A website for the ACM India research workshop at Crescent, presenting speakers, the programme, registration information, the venue, and organiser contacts.",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p25:0",
+          "node": "p25",
+          "index": 0,
+          "value": "Webly",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p26:3",
+          "node": "p26",
+          "index": 3,
+          "value": "",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p26:5",
+          "node": "p26",
+          "index": 5,
+          "value": "Based in ",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p28:0",
+          "node": "p28",
+          "index": 0,
+          "value": "",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p30:3",
+          "node": "p30",
+          "index": 3,
+          "value": "Call ",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p31:0",
+          "node": "p31",
+          "index": 0,
+          "value": "hello@endcap.design ",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p32:0",
+          "node": "p32",
+          "index": 0,
+          "value": "(949) 424-7340",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p33:0",
+          "node": "p33",
+          "index": 0,
+          "value": "Projects",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p34:0",
+          "node": "p34",
+          "index": 0,
+          "value": "About",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p35:0",
+          "node": "p35",
+          "index": 0,
+          "value": "Contact",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p36:0",
+          "node": "p36",
+          "index": 0,
+          "value": "© 2026 Webly · Portfolio",
+          "group": "Page content",
+          "tag": "span"
+        },
+        {
+          "id": "p37:0",
+          "node": "p37",
+          "index": 0,
+          "value": "Webly",
+          "group": "Page content",
+          "tag": "div"
+        }
+      ],
+      "visible": true
+    },
+    {
+      "path": "/about/",
+      "title": "About | Webly",
+      "description": "A small studio for thoughtful design, development, and digital experiences.",
+      "heading": "LEARNING BY building.",
+      "fields": [
+        {
+          "id": "p0:0",
+          "node": "p0",
+          "index": 0,
+          "value": "Webly",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p1:0",
+          "node": "p1",
+          "index": 0,
+          "value": "Menu ",
+          "group": "Page content",
+          "tag": "button"
+        },
+        {
+          "id": "p2:0",
+          "node": "p2",
+          "index": 0,
+          "value": "Projects",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p3:0",
+          "node": "p3",
+          "index": 0,
+          "value": "About",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p4:0",
+          "node": "p4",
+          "index": 0,
+          "value": "Contact",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p5:0",
+          "node": "p5",
+          "index": 0,
+          "value": "About this collection",
+          "group": "LEARNING BY building.",
+          "tag": "p"
+        },
+        {
+          "id": "p6:0",
+          "node": "p6",
+          "index": 0,
+          "value": "LEARNING BY",
+          "group": "LEARNING BY building.",
+          "tag": "h1"
+        },
+        {
+          "id": "p7:0",
+          "node": "p7",
+          "index": 0,
+          "value": "building.",
+          "group": "LEARNING BY building.",
+          "tag": "em"
+        },
+        {
+          "id": "p9:0",
+          "node": "p9",
+          "index": 0,
+          "value": "Webly",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p10:3",
+          "node": "p10",
+          "index": 3,
+          "value": "",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p10:5",
+          "node": "p10",
+          "index": 5,
+          "value": "Based in ",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p12:0",
+          "node": "p12",
+          "index": 0,
+          "value": "",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p14:3",
+          "node": "p14",
+          "index": 3,
+          "value": "Call ",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p15:0",
+          "node": "p15",
+          "index": 0,
+          "value": "hello@endcap.design ",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p16:0",
+          "node": "p16",
+          "index": 0,
+          "value": "(949) 424-7340",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p17:0",
+          "node": "p17",
+          "index": 0,
+          "value": "Projects",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p18:0",
+          "node": "p18",
+          "index": 0,
+          "value": "About",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p19:0",
+          "node": "p19",
+          "index": 0,
+          "value": "Contact",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p20:0",
+          "node": "p20",
+          "index": 0,
+          "value": "© 2026 Webly · Portfolio",
+          "group": "Page content",
+          "tag": "span"
+        },
+        {
+          "id": "p21:0",
+          "node": "p21",
+          "index": 0,
+          "value": "Webly",
+          "group": "Page content",
+          "tag": "div"
+        }
+      ],
+      "visible": true
+    },
+    {
+      "path": "/contact/",
+      "title": "Get in touch | Webly",
+      "description": "Get in touch with Webly about a project, collaboration, or question.",
+      "heading": "Tell us about your project.",
+      "fields": [
+        {
+          "id": "p0:0",
+          "node": "p0",
+          "index": 0,
+          "value": "Webly",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p1:0",
+          "node": "p1",
+          "index": 0,
+          "value": "Menu ",
+          "group": "Page content",
+          "tag": "button"
+        },
+        {
+          "id": "p2:0",
+          "node": "p2",
+          "index": 0,
+          "value": "Projects",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p3:0",
+          "node": "p3",
+          "index": 0,
+          "value": "About",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p4:0",
+          "node": "p4",
+          "index": 0,
+          "value": "Contact",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p5:0",
+          "node": "p5",
+          "index": 0,
+          "value": "Your next design project",
+          "group": "Tell us about your project.",
+          "tag": "p"
+        },
+        {
+          "id": "p6:0",
+          "node": "p6",
+          "index": 0,
+          "value": "Tell us about",
+          "group": "Tell us about your project.",
+          "tag": "h1"
+        },
+        {
+          "id": "p7:0",
+          "node": "p7",
+          "index": 0,
+          "value": "your project.",
+          "group": "Tell us about your project.",
+          "tag": "em"
+        },
+        {
+          "id": "p8:0",
+          "node": "p8",
+          "index": 0,
+          "value": "Have a question about a project, want to collaborate, or just want to say hello? Send a note.",
+          "group": "Tell us about your project.",
+          "tag": "p"
+        },
+        {
+          "id": "p9:0",
+          "node": "p9",
+          "index": 0,
+          "value": "hello@endcap.design ",
+          "group": "Tell us about your project.",
+          "tag": "a"
+        },
+        {
+          "id": "p10:0",
+          "node": "p10",
+          "index": 0,
+          "value": "Or call ",
+          "group": "Tell us about your project.",
+          "tag": "p"
+        },
+        {
+          "id": "p11:0",
+          "node": "p11",
+          "index": 0,
+          "value": "(949) 424-7340",
+          "group": "Tell us about your project.",
+          "tag": "a"
+        },
+        {
+          "id": "p12:0",
+          "node": "p12",
+          "index": 0,
+          "value": "We reply within an hour during business hours, and we only use your details to answer you. No mailing lists. We agree on scope, timing, and price before work begins.",
+          "group": "Tell us about your project.",
+          "tag": "p"
+        },
+        {
+          "id": "p13:0",
+          "node": "p13",
+          "index": 0,
+          "value": "Your name",
+          "group": "Tell us about your project.",
+          "tag": "label"
+        },
+        {
+          "id": "p14:0",
+          "node": "p14",
+          "index": 0,
+          "value": "Email address",
+          "group": "Tell us about your project.",
+          "tag": "label"
+        },
+        {
+          "id": "p15:0",
+          "node": "p15",
+          "index": 0,
+          "value": "What are you working on? ",
+          "group": "Tell us about your project.",
+          "tag": "label"
+        },
+        {
+          "id": "p16:0",
+          "node": "p16",
+          "index": 0,
+          "value": "Optional",
+          "group": "Tell us about your project.",
+          "tag": "span"
+        },
+        {
+          "id": "p17:0",
+          "node": "p17",
+          "index": 0,
+          "value": "Tell us about your project",
+          "group": "Tell us about your project.",
+          "tag": "label"
+        },
+        {
+          "id": "p18:0",
+          "node": "p18",
+          "index": 0,
+          "value": "Send the details ",
+          "group": "Tell us about your project.",
+          "tag": "button"
+        },
+        {
+          "id": "p20:0",
+          "node": "p20",
+          "index": 0,
+          "value": "Website",
+          "group": "Tell us about your project.",
+          "tag": "label"
+        },
+        {
+          "id": "p21:0",
+          "node": "p21",
+          "index": 0,
+          "value": "Please ",
+          "group": "Tell us about your project.",
+          "tag": "p"
+        },
+        {
+          "id": "p21:2",
+          "node": "p21",
+          "index": 2,
+          "value": " to arrange a conversation. This form needs JavaScript to send.",
+          "group": "Tell us about your project.",
+          "tag": "p"
+        },
+        {
+          "id": "p22:0",
+          "node": "p22",
+          "index": 0,
+          "value": "email hello@endcap.design",
+          "group": "Tell us about your project.",
+          "tag": "a"
+        },
+        {
+          "id": "p23:0",
+          "node": "p23",
+          "index": 0,
+          "value": "We reply within an hour during business hours, and we only use your details to answer you. No mailing lists. We agree on scope, timing, and price before work begins.",
+          "group": "Tell us about your project.",
+          "tag": "p"
+        },
+        {
+          "id": "p24:0",
+          "node": "p24",
+          "index": 0,
+          "value": "hello@endcap.design ",
+          "group": "Tell us about your project.",
+          "tag": "a"
+        },
+        {
+          "id": "p25:0",
+          "node": "p25",
+          "index": 0,
+          "value": "Webly",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p26:5",
+          "node": "p26",
+          "index": 5,
+          "value": "Based in ",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p27:0",
+          "node": "p27",
+          "index": 0,
+          "value": "Websites",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p30:3",
+          "node": "p30",
+          "index": 3,
+          "value": "Call ",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p31:0",
+          "node": "p31",
+          "index": 0,
+          "value": "hello@endcap.design ",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p32:0",
+          "node": "p32",
+          "index": 0,
+          "value": "(949) 424-7340",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p33:0",
+          "node": "p33",
+          "index": 0,
+          "value": "Projects",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p34:0",
+          "node": "p34",
+          "index": 0,
+          "value": "About",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p35:0",
+          "node": "p35",
+          "index": 0,
+          "value": "Contact",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p36:0",
+          "node": "p36",
+          "index": 0,
+          "value": "© 2026 Webly · Portfolio",
+          "group": "Page content",
+          "tag": "span"
+        },
+        {
+          "id": "p37:0",
+          "node": "p37",
+          "index": 0,
+          "value": "Webly",
+          "group": "Page content",
+          "tag": "div"
+        }
+      ],
+      "visible": true
+    },
+    {
+      "path": "/services/",
+      "title": "Services | Webly",
+      "description": "Website design, digital products, and e-commerce experiences, thoughtfully built.",
+      "heading": "Digital experiences, thoughtfully built.",
+      "fields": [
+        {
+          "id": "p0:0",
+          "node": "p0",
+          "index": 0,
+          "value": "Webly",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p1:0",
+          "node": "p1",
+          "index": 0,
+          "value": "Menu ",
+          "group": "Page content",
+          "tag": "button"
+        },
+        {
+          "id": "menu-0:0",
+          "node": "menu-0",
+          "index": 0,
+          "value": "Services",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "menu-1:0",
+          "node": "menu-1",
+          "index": 0,
+          "value": "Our work",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "menu-2:0",
+          "node": "menu-2",
+          "index": 0,
+          "value": "Insights",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "menu-3:0",
+          "node": "menu-3",
+          "index": 0,
+          "value": "About",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "menu-4:0",
+          "node": "menu-4",
+          "index": 0,
+          "value": "Let’s talk",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "menu-eyebrow:0",
+          "node": "menu-eyebrow",
+          "index": 0,
+          "value": "What we do",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "menu-heading:0",
+          "node": "menu-heading",
+          "index": 0,
+          "value": "Digital experiences, thoughtfully built.",
+          "group": "Page content",
+          "tag": "h1"
+        },
+        {
+          "id": "menu-lead:0",
+          "node": "menu-lead",
+          "index": 0,
+          "value": "From a first idea to a finished launch, we bring design and development together.",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p9:0",
+          "node": "p9",
+          "index": 0,
+          "value": "Webly",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p10:0",
+          "node": "p10",
+          "index": 0,
+          "value": "Design & development.",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p10:2",
+          "node": "p10",
+          "index": 2,
+          "value": "Based in ",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p10:4",
+          "node": "p10",
+          "index": 4,
+          "value": ".",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p13:0",
+          "node": "p13",
+          "index": 0,
+          "value": "India",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p14:3",
+          "node": "p14",
+          "index": 3,
+          "value": "Call ",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p15:0",
+          "node": "p15",
+          "index": 0,
+          "value": "hello@endcap.design ",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p16:0",
+          "node": "p16",
+          "index": 0,
+          "value": "(949) 424-7340",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p17:0",
+          "node": "p17",
+          "index": 0,
+          "value": "Projects",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p18:0",
+          "node": "p18",
+          "index": 0,
+          "value": "About",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p19:0",
+          "node": "p19",
+          "index": 0,
+          "value": "Contact",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p20:0",
+          "node": "p20",
+          "index": 0,
+          "value": "© 2026 Webly · Portfolio",
+          "group": "Page content",
+          "tag": "span"
+        },
+        {
+          "id": "p21:0",
+          "node": "p21",
+          "index": 0,
+          "value": "Webly",
+          "group": "Page content",
+          "tag": "div"
+        }
+      ],
+      "visible": true
+    },
+    {
+      "path": "/insights/",
+      "title": "Insights | Webly",
+      "description": "Notes and ideas about design, digital experiences, and the thinking behind the work.",
+      "heading": "Thinking behind the work.",
+      "fields": [
+        {
+          "id": "p0:0",
+          "node": "p0",
+          "index": 0,
+          "value": "Webly",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p1:0",
+          "node": "p1",
+          "index": 0,
+          "value": "Menu ",
+          "group": "Page content",
+          "tag": "button"
+        },
+        {
+          "id": "menu-0:0",
+          "node": "menu-0",
+          "index": 0,
+          "value": "Services",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "menu-1:0",
+          "node": "menu-1",
+          "index": 0,
+          "value": "Our work",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "menu-2:0",
+          "node": "menu-2",
+          "index": 0,
+          "value": "Insights",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "menu-3:0",
+          "node": "menu-3",
+          "index": 0,
+          "value": "About",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "menu-4:0",
+          "node": "menu-4",
+          "index": 0,
+          "value": "Let’s talk",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "menu-eyebrow:0",
+          "node": "menu-eyebrow",
+          "index": 0,
+          "value": "Notes & ideas",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "menu-heading:0",
+          "node": "menu-heading",
+          "index": 0,
+          "value": "Thinking behind the work.",
+          "group": "Page content",
+          "tag": "h1"
+        },
+        {
+          "id": "menu-lead:0",
+          "node": "menu-lead",
+          "index": 0,
+          "value": "A closer look at the design choices, interactions, and experiments across the projects.",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p9:0",
+          "node": "p9",
+          "index": 0,
+          "value": "Webly",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p10:0",
+          "node": "p10",
+          "index": 0,
+          "value": "Design & development.",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p10:2",
+          "node": "p10",
+          "index": 2,
+          "value": "Based in ",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p10:4",
+          "node": "p10",
+          "index": 4,
+          "value": ".",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p13:0",
+          "node": "p13",
+          "index": 0,
+          "value": "India",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p14:3",
+          "node": "p14",
+          "index": 3,
+          "value": "Call ",
+          "group": "Page content",
+          "tag": "p"
+        },
+        {
+          "id": "p15:0",
+          "node": "p15",
+          "index": 0,
+          "value": "hello@endcap.design ",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p16:0",
+          "node": "p16",
+          "index": 0,
+          "value": "(949) 424-7340",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p17:0",
+          "node": "p17",
+          "index": 0,
+          "value": "Projects",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p18:0",
+          "node": "p18",
+          "index": 0,
+          "value": "About",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p19:0",
+          "node": "p19",
+          "index": 0,
+          "value": "Contact",
+          "group": "Page content",
+          "tag": "a"
+        },
+        {
+          "id": "p20:0",
+          "node": "p20",
+          "index": 0,
+          "value": "© 2026 Webly · Portfolio",
+          "group": "Page content",
+          "tag": "span"
+        },
+        {
+          "id": "p21:0",
+          "node": "p21",
+          "index": 0,
+          "value": "Webly",
+          "group": "Page content",
+          "tag": "div"
+        }
+      ],
+      "visible": true
+    }
+  ]
+}

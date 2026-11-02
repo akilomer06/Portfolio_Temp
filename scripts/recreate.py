@@ -87,6 +87,8 @@ def fetch_asset(path):
     return path, data
 
 def main():
+    if (ROOT / 'cms.seed.json').exists():
+        raise SystemExit('This site is indexed by the CMS. Re-import into a separate directory to preserve the existing editing IDs and content.')
     DIST.mkdir(parents=True, exist_ok=True)
     home = get(ORIGIN + '/')
     soup = BeautifulSoup(home, 'html.parser')

@@ -1,0 +1,78 @@
+.personal-featured-image{background:#111b28;display:flex;align-items:center;overflow:hidden}.personal-featured-image .ed-device-stage{position:static!important;width:100%;height:auto;display:block;transform:none!important;object-fit:contain}.portfolio-projects .ed-print-image{aspect-ratio:16/9;background:#e5e6dd}.portfolio-projects .ed-print-image img{width:100%;height:100%;object-fit:cover;object-position:top}.portfolio-description{font-size:14px!important;line-height:1.65!important;max-width:58ch;margin-top:12px!important;color:var(--muted)}.personal-about{display:grid;grid-template-columns:.55fr 1fr 1fr;gap:35px;padding-block:90px}.personal-about h2,.personal-about h1{font-family:var(--display);font-size:clamp(40px,5vw,70px);line-height:.95}.personal-about>p:last-child{font-size:17px;line-height:1.8}.ed-cover-detail h2{font-size:clamp(35px,3.6vw,62px)!important}.ed-cover-detail{padding:32px!important}.portfolio-projects .ed-print-grid{row-gap:65px}.interior-heading{padding-block:70px}.interior-heading>p:last-child{max-width:45ch;margin-top:22px}.personal-featured-image img{border:0}@media(max-width:800px){.personal-about{grid-template-columns:1fr;gap:25px;padding-block:60px}.ed-cover-detail{padding:24px!important}.portfolio-description{font-size:13px!important}.personal-featured-image{min-height:0}}
+.portfolio-projects.ed-print-work{padding-top:34px;padding-bottom:100px}
+.portfolio-projects .ed-print-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:54px 24px;row-gap:54px}
+.portfolio-projects .ed-print-grid article:nth-child(2),.portfolio-projects .ed-print-grid article:nth-child(4){padding-top:92px}
+.portfolio-projects .ed-print-image{aspect-ratio:1.05;background:#e5e6dd}
+.work-index{padding-block:22px 0;margin-bottom:0}
+.work-index-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}
+.work-index-head .eyebrow{margin:0}
+.work-index-total{font-size:10px;letter-spacing:.14em;color:var(--muted);font-weight:650}
+.work-index-rail{position:relative;height:1px;background:var(--line);margin-bottom:15px}
+.work-index-route{position:absolute;inset:0;background:repeating-linear-gradient(90deg,var(--muted) 0 2px,transparent 2px 8px);opacity:.45}
+.work-index-plane{position:absolute;top:-11px;left:0;color:var(--ink);font-size:17px;animation:work-index-flight 9s ease-in-out infinite alternate}
+@keyframes work-index-flight{from{left:0;transform:translateX(-35%) rotate(-15deg)}to{left:100%;transform:translateX(-65%) rotate(-15deg)}}
+.work-index-items{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.work-index-items a{display:flex;gap:9px;align-items:baseline;text-decoration:none;color:var(--ink);font-size:11px;line-height:1.4}
+.work-index-number{font-size:9px;letter-spacing:.1em;color:var(--muted);font-weight:700}
+.work-index-label{transition:color .2s ease}
+.work-index-items a:hover .work-index-label{color:var(--muted)}
+@media(max-width:1100px){.portfolio-projects .ed-print-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:45px 22px}.work-index-items{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:12px}}
+@media(max-width:650px){.portfolio-projects.ed-print-work{padding-top:24px;padding-bottom:64px}.portfolio-projects .ed-print-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 14px}.work-index{padding-top:13px}.work-index-items{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 10px}.work-index-items a{font-size:10px}.work-index-head{margin-bottom:12px}}
+@media(prefers-reduced-motion:reduce){.work-index-plane{animation:none;left:50%}}
+/* Project artboards: keep the source captures at their native aspect ratio inside a browser frame. */
+.portfolio-projects .ed-print-image{position:relative;isolation:isolate;aspect-ratio:1.05;overflow:hidden;background:#e9e5da;display:block}
+.portfolio-projects article[data-project-id="quality-kitchen"] .ed-print-image{background:#e8e3d8}
+.portfolio-projects article[data-project-id="talent-hunt"] .ed-print-image{background:#eee9df}
+.portfolio-projects article[data-project-id="jrzees"] .ed-print-image{background:#142016}
+.portfolio-projects article[data-project-id="prompt-pop"] .ed-print-image{background:#eee9df}
+.portfolio-projects article[data-project-id="acm-rocs"] .ed-print-image{background:#d9e0e2}
+.portfolio-projects .ed-print-image::before{content:"";position:absolute;z-index:2;left:5%;top:10%;width:90%;height:clamp(16px,2.2vw,24px);box-sizing:border-box;background:radial-gradient(circle at 12px 50%,#ec6758 0 3px,transparent 3.5px),radial-gradient(circle at 23px 50%,#eabb48 0 3px,transparent 3.5px),radial-gradient(circle at 34px 50%,#79aa77 0 3px,transparent 3.5px),#f4f3ef;border-radius:5px 5px 0 0;box-shadow:0 1px 2px #0002}
+.portfolio-projects .ed-print-image>img{position:absolute;z-index:1;left:5%;top:calc(10% + clamp(16px,2.2vw,24px));display:block;width:90%;height:auto;aspect-ratio:16/9;object-fit:contain;object-position:top center;background:#fff;box-shadow:0 16px 35px #1113;transition:transform .65s;transform-origin:center top}
+.portfolio-projects .ed-print-image:hover>img{transform:scale(1.018)}
+.portfolio-projects .ed-print-image::after{content:attr(data-project-mark);position:absolute;z-index:3;right:5%;bottom:6%;width:27%;height:34%;display:grid;place-items:center;background:#181a17;color:#f8f7f3;font-family:var(--display);font-size:clamp(30px,4vw,56px);font-weight:800;letter-spacing:-.07em;box-shadow:0 16px 36px #1114}
+.portfolio-projects article[data-project-id="quality-kitchen"] .ed-print-image::after{background:#17201a;color:#d9bb79}
+.portfolio-projects article[data-project-id="talent-hunt"] .ed-print-image::after{background:#f24a2c;color:#fff}
+.portfolio-projects article[data-project-id="jrzees"] .ed-print-image::after{background:#a9ff00;color:#10140c}
+.portfolio-projects article[data-project-id="prompt-pop"] .ed-print-image::after{background:#171929;color:#ff5035}
+.portfolio-projects article[data-project-id="acm-rocs"] .ed-print-image::after{background:#0e3648;color:#f3f4ed}
+@media(max-width:650px){.portfolio-projects .ed-print-image::before{height:16px}.portfolio-projects .ed-print-image>img{top:calc(10% + 16px)}}
+
+/* Stagger each pair, then give the final Talent Hunt piece the full-width feature treatment. */
+.portfolio-projects .ed-print-grid article#project-talent-hunt{grid-column:1/-1;padding-top:0!important}
+.portfolio-projects .ed-print-grid article#project-talent-hunt .ed-print-image{aspect-ratio:1.9;background:#e9e6dc}
+.portfolio-projects .ed-print-grid article#project-talent-hunt .ed-print-image::before{width:56%;left:5%;top:11%;height:clamp(17px,1.8vw,25px)}
+.portfolio-projects .ed-print-grid article#project-talent-hunt .ed-print-image>img{left:5%;top:calc(11% + clamp(17px,1.8vw,25px));width:56%;max-height:none}
+.portfolio-projects .ed-print-grid article#project-talent-hunt .ed-print-image::after{display:none}
+.talent-sidecard{position:absolute;z-index:4;right:8%;top:12%;width:26%;height:76%;box-sizing:border-box;padding:3.2%;display:flex;flex-direction:column;justify-content:space-between;background:#141c2b;color:#f6f2e8;border-top:5px solid #f04b2c;box-shadow:0 20px 46px #1113;text-align:left}
+.talent-side-meta,.talent-side-note{font:600 10px/1.5 var(--body,Arial),Arial,sans-serif;letter-spacing:.13em}
+.talent-side-title{display:flex;flex-direction:column;font-family:var(--display);font-size:clamp(42px,7vw,112px);font-weight:900;line-height:.78;letter-spacing:-.08em}
+.talent-side-title .accent{color:#ff5133;margin-left:8%}
+.talent-side-note{border-top:1px solid #f6f2e855;padding-top:12px;color:#d6dded}
+@media(max-width:650px){
+ .portfolio-projects .ed-print-grid>article{min-width:0;grid-column:auto}
+ .portfolio-projects .ed-print-grid>article:nth-child(even){padding-top:24px}
+ .portfolio-projects .ed-print-grid article#project-talent-hunt{grid-column:auto}
+ .portfolio-projects .ed-print-grid>article:last-child:nth-child(odd),
+ .portfolio-projects .ed-print-grid article#project-talent-hunt:last-child:nth-child(odd){grid-column:1/-1;padding-top:0}
+ .portfolio-projects .ed-print-caption{grid-template-columns:16px minmax(0,1fr);gap:6px;margin-top:14px;padding-top:14px}
+ .portfolio-projects .ed-print-caption>span{font-size:10px;padding-top:4px}
+ .portfolio-projects .ed-print-caption h3{font-size:clamp(18px,4.5vw,28px);line-height:1.1;overflow-wrap:anywhere}
+ .portfolio-projects .portfolio-description{font-size:12px!important;line-height:1.55!important;margin-top:9px!important}
+ .portfolio-projects .ed-print-image::before{height:10px;background:radial-gradient(circle at 6px 50%,#ec6758 0 1.5px,transparent 2px),radial-gradient(circle at 12px 50%,#eabb48 0 1.5px,transparent 2px),radial-gradient(circle at 18px 50%,#79aa77 0 1.5px,transparent 2px),#f4f3ef}
+ .portfolio-projects .ed-print-image>img{top:calc(10% + 10px)}
+ .portfolio-projects .ed-print-image::after{font-size:clamp(18px,5vw,30px)}
+ .portfolio-projects .ed-print-grid>article:last-child:nth-child(odd) .ed-print-image,
+ .portfolio-projects .ed-print-grid article#project-talent-hunt:last-child:nth-child(odd) .ed-print-image{aspect-ratio:1.25}
+ .portfolio-projects .ed-print-grid>article:last-child:nth-child(odd) .ed-print-caption{grid-template-columns:24px minmax(0,1fr);gap:12px}
+ .portfolio-projects .ed-print-grid>article:last-child:nth-child(odd) h3{font-size:clamp(24px,6vw,34px)}
+ .portfolio-projects .ed-print-grid>article:last-child:nth-child(odd):not(#project-talent-hunt) .ed-print-image::before{width:84%;top:16%}
+ .portfolio-projects .ed-print-grid>article:last-child:nth-child(odd):not(#project-talent-hunt) .ed-print-image>img{width:84%;top:calc(16% + 10px)}
+ .portfolio-projects .ed-print-grid>article:last-child:nth-child(odd):not(#project-talent-hunt) .ed-print-image::after{height:60%;width:23%}
+ .portfolio-projects .ed-print-grid article#project-talent-hunt .ed-print-image::before{width:56%;top:11%;height:10px}
+ .portfolio-projects .ed-print-grid article#project-talent-hunt .ed-print-image>img{width:56%;top:calc(11% + 10px)}
+ .portfolio-projects .ed-print-grid article#project-talent-hunt:last-child:nth-child(odd) .ed-print-image::before{width:78%;top:16%}
+ .portfolio-projects .ed-print-grid article#project-talent-hunt:last-child:nth-child(odd) .ed-print-image>img{width:78%;top:calc(16% + 10px)}
+ .talent-sidecard{top:12%;right:5%;width:29%;height:76%;padding:3%;border-top-width:3px}
+ .talent-side-meta,.talent-side-note{font-size:6px}
+ .talent-side-title{font-size:clamp(22px,7vw,40px)}
+}

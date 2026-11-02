@@ -4,3 +4,8 @@ __pycache__/
 *.log
 .env
 .env.*
+.local/
+.openai/
+
+.vercel
+.env*
