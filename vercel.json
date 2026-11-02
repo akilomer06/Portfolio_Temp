@@ -2,24 +2,19 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "outputDirectory": "dist",
-  "trailingSlash": true,
   "functions": {
     "api/index.mjs": {
       "includeFiles": "{dist/**,cms.seed.json,cms.migrations.json}",
       "maxDuration": 60
     }
   },
-  "rewrites": [
-    { "source": "/api/:path*", "destination": "/api/index?__route=/api/:path*" },
-    { "source": "/media/uploads/:path*", "destination": "/api/index?__route=/media/uploads/:path*" },
-    { "source": "/", "destination": "/api/index?__route=/" },
-    { "source": "/:page(work|services|insights|about|contact)/", "destination": "/api/index?__route=/:page/" }
-  ],
-  "headers": [
-    { "source": "/admin/:path*", "headers": [
-      { "key": "X-Frame-Options", "value": "DENY" },
-      { "key": "Cache-Control", "value": "no-store" },
-      { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
-    ]}
+  "routes": [
+    { "src": "/admin(?:/.*)?", "headers": { "X-Frame-Options": "DENY", "Cache-Control": "no-store", "X-Robots-Tag": "noindex, nofollow" }, "continue": true },
+    { "src": "/api/(.*)", "dest": "/api/index?__route=/api/$1" },
+    { "src": "/media/uploads/(.*)", "dest": "/api/index?__route=/media/uploads/$1" },
+    { "src": "/", "dest": "/api/index?__route=/" },
+    { "src": "/(work|services|insights|about|contact)/?", "dest": "/api/index?__route=/$1/" },
+    { "src": "/admin/?", "dest": "/admin/index.html" },
+    { "handle": "filesystem" }
   ]
 }
