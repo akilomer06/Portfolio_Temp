@@ -9,7 +9,7 @@
   const { theme, settings, projects, navigation, page, hiddenPaths=[] } = content;
   document.documentElement.dataset.cmsMotion=theme.animations===false?'off':'on';
   document.dispatchEvent(new CustomEvent('cms:settings',{detail:{animations:theme.animations}}));
-  const css = document.createElement('style');
+  const css = document.getElementById('cms-initial-theme') || document.createElement('style');
   const font = value => '"' + value.replace(/[^a-zA-Z0-9 -]/g, '') + '"';
   css.textContent = `[hidden]{display:none!important}:root{--lime:${theme.accent};--acid:${theme.accent};--paper:${theme.paper};--ink:${theme.ink};--muted:${theme.muted};--line:${theme.line};--display:${font(theme.headingFont)},Hanken,Arial,sans-serif}body{font-family:${font(theme.bodyFont)},Arial,sans-serif;font-size:${theme.bodySize}px}em{font-family:${font(theme.serifFont)},Georgia,serif}`;
   for (const custom of theme.customFonts || []) css.textContent += `@font-face{font-family:${font(custom.name)};src:url(${JSON.stringify(custom.url)});font-display:swap}`;

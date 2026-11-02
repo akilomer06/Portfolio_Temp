@@ -50,6 +50,10 @@ test('CMS authentication, publishing, persistence, inbox and recovery', async t 
       assert.equal(saved.response.status,200);revision=saved.result.revision;
       assert.equal((await request('/api/site?path=/',{auth:false})).result.theme.accent,originalAccent);
       assert.equal((await request('/api/admin/preview?path=/')).result.theme.accent,'#b2d2ff');
+      const draftHTML=await (await fetch(origin+'/?preview=draft',{headers:{Cookie:cookie}})).text();
+      assert.match(draftHTML,/<style id="cms-initial-theme">:root\{--lime:#b2d2ff;--acid:#b2d2ff;/);
+      const unchangedHTML=await (await fetch(origin+'/')).text();
+      assert.ok(unchangedHTML.includes('--acid:'+originalAccent+';'),'draft styles must not leak into the first public render');
       assert.equal((await request('/api/admin/draft',{method:'PUT',data:{content,revision:revision-1}})).response.status,409);
       const bad=structuredClone(content);bad.projects[0].url='javascript:alert(1)';
       assert.equal((await request('/api/admin/draft',{method:'PUT',data:{content:bad,revision}})).response.status,400);
@@ -59,6 +63,15 @@ test('CMS authentication, publishing, persistence, inbox and recovery', async t 
       const publicContent=(await request('/api/site?path=/',{auth:false})).result;
       assert.equal(publicContent.theme.accent,'#b2d2ff');assert.equal(publicContent.projects[0].name,'Updated project');assert.equal(publicContent.inquiries,undefined);
       const publishedHTML=await (await fetch(origin+'/')).text();assert.match(publishedHTML,/<title>Published SEO title &amp; details<\/title>/);
+      for(const page of content.pages) {
+        const html=await (await fetch(origin+page.path)).text();
+        const style=/<style id="cms-initial-theme">([\s\S]*?)<\/style>/.exec(html);
+        assert.ok(style,'every page must include the saved palette without JavaScript');
+        assert.ok(style[1].includes('--acid:#b2d2ff;'));
+        assert.ok(style[1].includes('--paper:'+content.theme.paper+';'));
+        assert.ok(html.indexOf(style[0])<html.indexOf('</head>'),'palette must be in the render-blocking head');
+        assert.ok(html.includes('name="theme-color"')&&html.includes('content="'+content.theme.paper+'"'));
+      }
       restoredId=(await request('/api/admin/state')).result.revisions[0].id;
       assert.equal((await request('/api/admin/restore',{method:'POST',data:{id:restoredId}})).response.status,200);
       assert.equal((await request('/api/admin/preview?path=/')).result.theme.accent,originalAccent);

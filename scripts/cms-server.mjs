@@ -138,6 +138,11 @@ export async function createCMS({ root, dataDirectory, cookieName = 'endcap_admi
       const page = content.pages.find(p => p.path === pagePath(pathname));
       if (!page) return html;
       const escape = value => String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+      // Apply the saved palette before the first paint, without waiting for /api/site.
+      const palette = Object.fromEntries(['accent','paper','ink','muted','line'].map(key => [key, /^#[a-f0-9]{6}$/i.test(content.theme[key]) ? content.theme[key] : seed.theme[key]]));
+      const initialTheme = `:root{--lime:${palette.accent};--acid:${palette.accent};--paper:${palette.paper};--ink:${palette.ink};--muted:${palette.muted};--line:${palette.line}}`;
+      html = html.replace('</head>', `<style id="cms-initial-theme">${initialTheme}</style></head>`);
+      html = html.replace(/<meta\b[^>]*name=["']theme-color["'][^>]*>/i, tag => tag.replace(/content=(["'])[\s\S]*?\1/i, `content="${palette.paper}"`));
       if (page.path === '/' && content.theme.animations !== false) {
         const accent = /^#[a-f0-9]{6}$/i.test(content.theme.accent) ? content.theme.accent : '#b7e1c4';
         const channels = accent.slice(1).match(/../g).map(hex => { const value = parseInt(hex,16)/255; return value <= .04045 ? value/12.92 : ((value+.055)/1.055)**2.4; });
