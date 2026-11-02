@@ -1,0 +1,12 @@
+{
+  "name": "endcap-recreation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Faithful static recreation of the Endcap Design website.",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs",
+    "check": "python scripts/verify.py"
+  },
+  "engines": { "node": ">=20" }
+}

@@ -1,0 +1,212 @@
+/* Actual project work on service pages that previously relied on text lists. */
+.legacy-service .legacy-service-project-gallery {
+  margin: 0;
+  padding: 65px 0 80px;
+  border-top: 1px solid var(--ink);
+}
+.legacy-service-project-heading {
+  display: grid;
+  grid-template-columns: .45fr 1.3fr .75fr;
+  gap: 28px;
+  align-items: end;
+  margin-bottom: 42px;
+}
+.legacy-service-project-heading .legacy-service-project-kicker {
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin: 0;
+  align-self: start;
+}
+.legacy-service .legacy-service-project-heading h2 {
+  font-size: clamp(48px, 5.8vw, 84px);
+  line-height: .97;
+  letter-spacing: -.055em;
+  margin: 0;
+  max-width: 13ch;
+}
+.legacy-service .legacy-service-project-heading > p:last-child {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 0;
+}
+.legacy-service-project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 57px 28px;
+}
+.legacy-service .legacy-service-project {
+  display: block;
+  min-width: 0;
+  color: var(--ink);
+  text-decoration: none;
+}
+.legacy-service-project-image {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden;
+  background: #dfe3d8;
+  aspect-ratio: 1.5;
+}
+.legacy-service-project-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  margin: 0;
+  max-height: none;
+  border-radius: 0;
+  transition: transform .5s ease;
+}
+.legacy-service-project:hover .legacy-service-project-image img { transform: scale(1.025); }
+.legacy-service-project-screen .legacy-service-project-image { padding: 30px 30px 0; }
+.legacy-service-project-screen .legacy-service-project-image img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: top;
+  box-shadow: 0 9px 28px #181a1724;
+}
+.legacy-service-project-print .legacy-service-project-image { background: #dcded5; }
+.legacy-service-project-image > span {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  background: var(--acid);
+  z-index: 1;
+  font-size: 22px;
+  line-height: 1;
+}
+.legacy-service-project-caption {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 5px 22px;
+  border-top: 1px solid var(--ink);
+  padding-top: 17px;
+  margin-top: 19px;
+}
+.legacy-service-project-caption > span:first-child {
+  grid-column: 1 / -1;
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.legacy-service .legacy-service-project-caption h3 {
+  font-size: clamp(27px, 2.6vw, 39px);
+  line-height: 1.06;
+  margin: 11px 0 0;
+  letter-spacing: -.045em;
+}
+.legacy-service .legacy-service-project-caption p {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 10px 0 0;
+  max-width: 48ch;
+}
+.legacy-service-project-caption > span:last-child {
+  font-size: 22px;
+  align-self: start;
+  margin-top: 10px;
+}
+#local-work .legacy-service-project:first-child,
+#local-work .legacy-service-project:last-child {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1.35fr .65fr;
+  gap: 0;
+  background: #252b26;
+  color: var(--paper);
+}
+#local-work .legacy-service-project:first-child .legacy-service-project-image,
+#local-work .legacy-service-project:last-child .legacy-service-project-image { aspect-ratio: 1.62; }
+#local-work .legacy-service-project:first-child .legacy-service-project-caption,
+#local-work .legacy-service-project:last-child .legacy-service-project-caption {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 40px;
+  border: 0;
+}
+#local-work .legacy-service-project:first-child .legacy-service-project-caption > span:first-child,
+#local-work .legacy-service-project:last-child .legacy-service-project-caption > span:first-child { margin-bottom: auto; }
+#local-work .legacy-service-project:first-child .legacy-service-project-caption h3,
+#local-work .legacy-service-project:last-child .legacy-service-project-caption h3 { font-size: clamp(32px, 3.8vw, 56px); }
+#local-work .legacy-service-project:first-child .legacy-service-project-caption p,
+#local-work .legacy-service-project:last-child .legacy-service-project-caption p { color: #d0d5c9; }
+#local-work .legacy-service-project:first-child .legacy-service-project-caption > span:last-child,
+#local-work .legacy-service-project:last-child .legacy-service-project-caption > span:last-child { margin-top: 28px; }
+#local-work .legacy-service-project:last-child { background: #d8e1e5; color: var(--ink); }
+#local-work .legacy-service-project:last-child .legacy-service-project-caption p { color: #4e5c5f; }
+#local-work + .legacy-service-copy-section {
+  background: var(--acid);
+  padding: 45px !important;
+  margin-inline: -20px !important;
+  border-top: 1px solid var(--ink) !important;
+}
+#local-work + .legacy-service-copy-section a { color: var(--ink); }
+.legacy-service-menu-list { border-top: 1px solid var(--ink); }
+.legacy-service .legacy-service-menu-list > a {
+  display: grid;
+  grid-template-columns: 30px 1fr 24px;
+  gap: 15px;
+  align-items: start;
+  padding: 18px 0;
+  border-bottom: 1px solid #181a1750;
+  text-decoration: none;
+}
+.legacy-service-menu-list > a > span:first-child { font-size: 10px; padding-top: 7px; }
+.legacy-service-menu-list > a > span:last-child { font-size: 19px; justify-self: end; }
+.legacy-service .legacy-service-menu-list h3 { font-size: 23px; line-height: 1.1; margin: 0; }
+.legacy-service .legacy-service-menu-list p { font-size: 13px; line-height: 1.55; margin: 7px 0 0; }
+.legacy-service .legacy-service-menu-note { font-size: 12px; line-height: 1.7; margin: 22px 0 0; }
+.legacy-service-menu-list > a:hover h3 { text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 800px) {
+  .legacy-service-project-heading { grid-template-columns: 1fr 1fr; gap: 18px; }
+  .legacy-service-project-heading .legacy-service-project-kicker { grid-column: 1 / -1; }
+  .legacy-service .legacy-service-project-heading h2 { font-size: 52px; }
+  .legacy-service .legacy-service-project-heading > p:last-child { font-size: 13px; }
+  .legacy-service-project-grid { gap: 35px 20px; }
+  #local-work .legacy-service-project:first-child,
+  #local-work .legacy-service-project:last-child { grid-template-columns: 1fr 1fr; }
+  #local-work .legacy-service-project:first-child .legacy-service-project-caption,
+  #local-work .legacy-service-project:last-child .legacy-service-project-caption { padding: 25px; }
+  #local-work .legacy-service-project:first-child .legacy-service-project-caption h3,
+  #local-work .legacy-service-project:last-child .legacy-service-project-caption h3 { font-size: 31px; }
+}
+@media (max-width: 650px) {
+  .legacy-service .legacy-service-project-gallery { padding: 34px 0 45px; }
+  .legacy-service-project-heading { display: block; margin-bottom: 27px; }
+  .legacy-service .legacy-service-project-heading h2 { font-size: 42px; margin-top: 15px; }
+  .legacy-service .legacy-service-project-heading > p:last-child { margin-top: 16px; }
+  .legacy-service-project-grid { grid-template-columns: 1fr; gap: 30px; }
+  .legacy-service-project-image { aspect-ratio: 1.5; }
+  .legacy-service-project-screen .legacy-service-project-image { padding: 17px 17px 0; }
+  .legacy-service-project-image > span { width: 34px; height: 34px; right: 10px; bottom: 10px; font-size: 17px; }
+  .legacy-service-project-caption { margin-top: 12px; padding-top: 13px; }
+  .legacy-service .legacy-service-project-caption h3 { font-size: 29px; }
+  .legacy-service .legacy-service-project-caption p { font-size: 12px; }
+  #local-work .legacy-service-project:first-child,
+  #local-work .legacy-service-project:last-child { display: block; grid-column: auto; }
+  #local-work .legacy-service-project:first-child .legacy-service-project-image,
+  #local-work .legacy-service-project:last-child .legacy-service-project-image { aspect-ratio: 1.5; }
+  #local-work .legacy-service-project:first-child .legacy-service-project-caption,
+  #local-work .legacy-service-project:last-child .legacy-service-project-caption { padding: 21px; min-height: 178px; }
+  #local-work .legacy-service-project:first-child .legacy-service-project-caption h3,
+  #local-work .legacy-service-project:last-child .legacy-service-project-caption h3 { font-size: 31px; }
+  #local-work + .legacy-service-copy-section { margin-inline: -10px !important; padding: 28px 20px !important; }
+  .legacy-service .legacy-service-menu-list > a { grid-template-columns: 20px 1fr 18px; gap: 11px; padding: 16px 0; }
+  .legacy-service .legacy-service-menu-list h3 { font-size: 21px; }
+  .legacy-service .legacy-service-menu-list p { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .legacy-service-project-image img { transition: none; }
+}

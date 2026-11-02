@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="320" height="320" role="img" aria-labelledby="t d">
+  <title id="t">Top 25, 2026 Orange County Shopping Center Website Index</title>
+  <desc id="d">Awarded by Endcap Design to the 25 Orange County shopping centers whose websites scored highest in its 2026 review of 298 centers.</desc>
+  <rect width="320" height="320" fill="#181a17"/>
+  <rect x="14" y="14" width="292" height="292" fill="none" stroke="#dce87a" stroke-width="1.5"/>
+  <g font-family="'Hanken Grotesk','Helvetica Neue',Arial,sans-serif" fill="#f2f0e7">
+    <text x="34" y="58" font-size="13" font-weight="700" letter-spacing="2.2" fill="#dce87a">2026 · ORANGE COUNTY</text>
+    <text x="30" y="150" font-size="96" font-weight="800" letter-spacing="-5">TOP</text>
+    <text x="30" y="226" font-size="96" font-weight="800" letter-spacing="-5" fill="#dce87a">25</text>
+    <text x="34" y="258" font-size="12.5" font-weight="600" letter-spacing="0.4">Shopping Center Website Index</text>
+    <text x="34" y="283" font-size="11" font-weight="500" letter-spacing="0.6" fill="#adb49f">endcap.design · 298 centers reviewed</text>
+  </g>
+  <g fill="none" stroke="#dce87a" stroke-width="1.5"><path d="M196 236h88"/><rect x="200" y="200" width="16" height="36"/><rect x="216" y="200" width="16" height="36"/><rect x="232" y="200" width="16" height="36"/></g>
+  <rect x="250" y="182" width="30" height="54" fill="#dce87a"/>
+</svg>
