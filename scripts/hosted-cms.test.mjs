@@ -64,12 +64,14 @@ test('hosted CMS keeps authenticated sessions and published content across fresh
     current.draft.theme.accent='#afcd12';
     current.draft.projects[0].url='nura-woad.vercel.app';
     current.draft.projects[0].screen='   ';
+    current.draft.projects[0].logo='/media/projects/nura-logo.png';
     const saved=await request('/api/admin/draft','PUT',{content:current.draft,revision:current.revision});
     assert.equal(saved.response.status,200);
     assert.equal((await request('/api/admin/preview?path=/')).data.theme.accent,'#afcd12');
     const draft=(await request('/api/admin/preview?path=/')).data;
     assert.equal(draft.projects[0].url,'https://nura-woad.vercel.app/');
     assert.equal(draft.projects[0].screen,'');
+    assert.equal(draft.projects[0].logo,'/media/projects/nura-logo.png');
     assert.equal((await request('/api/admin/publish','POST',{revision:saved.data.revision})).response.status,200);
     assert.equal((await request('/api/site?path=/')).data.theme.accent,'#afcd12');
     assert.equal((await request('/api/site?path=/')).data.projects[0].url,'https://nura-woad.vercel.app/');

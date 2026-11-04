@@ -2,7 +2,7 @@
 
 Run `npm run dev` and open http://localhost:5173. Admin: http://localhost:5173/admin/.
 
-The selected work contains The Quality Kitchen, NURA, Prompt Pop 2K26, and Talent Hunt 2K26. Project images are saved in `dist/media/projects/`; NURA uses the original Almarziyah perfume image from its website without alteration. Mobile uses paired cards with a full-width final project when the count is odd.
+The selected work contains The Quality Kitchen, NURA, Prompt Pop 2K26, and Talent Hunt 2K26. Project images are saved in `dist/media/projects/`; NURA uses the homepage screenshot and logo image supplied by the owner, without alteration. Mobile uses paired cards with a full-width final project when the count is odd.
 
 The header includes Services, Our work, Insights, About, and Let’s talk. The CMS manages the six published pages, four project records, theme colors, fonts, navigation, uploads, and contact inquiries.
 

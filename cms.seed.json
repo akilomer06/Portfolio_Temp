@@ -73,14 +73,15 @@
       "name": "NURA",
       "category": "Fragrance & commerce",
       "url": "https://nura-woad.vercel.app/",
-      "image": "/media/projects/nura-original.webp",
+      "image": "/media/projects/nura-homepage.png",
       "screen": "",
-      "alt": "Original NURA Almarziyah perfume image from the NURA website",
+      "alt": "NURA homepage showing Signature of Heritage with perfume and perfume oil",
       "description": "A curated fragrance storefront with an emerald and gold identity, editorial typography, perfume and oil collections, scent details, size selection, a shopping bag, and WhatsApp ordering.",
       "status": "published",
       "featured": false,
       "homeVisible": true,
-      "order": 1
+      "order": 1,
+      "logo": "/media/projects/nura-logo.png"
     },
     {
       "id": "prompt-pop",

@@ -39,8 +39,8 @@
 
 /* Stagger each pair, then give the final Talent Hunt piece the full-width feature treatment. */
 .portfolio-projects article[data-project-id="nura"] .ed-print-image{background:#10271d}
-.portfolio-projects article[data-project-id="nura"] .ed-print-image>img{inset:0;width:100%;height:100%;padding:9%;box-sizing:border-box;aspect-ratio:auto;object-fit:contain;object-position:center;background:transparent;box-shadow:none}
-.portfolio-projects article[data-project-id="nura"] .ed-print-image::before,.portfolio-projects article[data-project-id="nura"] .ed-print-image::after{display:none}
+.portfolio-projects .ed-print-image.has-project-logo::after{display:none}
+.portfolio-projects .ed-print-image>img.portfolio-project-logo{position:absolute;z-index:3;left:auto;top:auto;right:5%;bottom:7%;width:47%;height:auto;aspect-ratio:auto;object-fit:contain;background:#10271d;box-shadow:0 16px 36px #1114;transform:none}
 .portfolio-projects .ed-print-grid article#project-talent-hunt{grid-column:1/-1;padding-top:0!important}
 .portfolio-projects .ed-print-grid article#project-talent-hunt .ed-print-image{aspect-ratio:1.9;background:#e9e6dc}
 .portfolio-projects .ed-print-grid article#project-talent-hunt .ed-print-image::before{width:56%;left:5%;top:11%;height:clamp(17px,1.8vw,25px)}

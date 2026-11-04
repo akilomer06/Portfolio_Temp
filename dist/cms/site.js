@@ -93,6 +93,14 @@
       const mark=article.querySelector('.ed-print-image'); if(mark) mark.dataset.projectMark=p.name.split(/\s+/).slice(0,2).map(word=>word[0]).join('').toUpperCase();
       if (image.getAttribute('src') !== p.image) { image.src = p.image; image.removeAttribute('srcset'); }
       image.alt = p.alt;
+      if (mark) {
+        let logo=mark.querySelector('.portfolio-project-logo');
+        if(p.logo){
+          if(!logo){logo=document.createElement('img');logo.className='portfolio-project-logo';logo.loading='lazy';mark.append(logo);}
+          logo.src=p.logo;logo.alt=p.name+' logo';
+        } else logo?.remove();
+        mark.classList.toggle('has-project-logo',!!p.logo);
+      }
       article.querySelector('h3 a').textContent = p.name;
       article.querySelector('.ed-print-caption p').textContent = p.category;
       const description=article.querySelector('.portfolio-description');if(description)description.textContent=p.description;
