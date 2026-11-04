@@ -1,4 +1,8 @@
 /* Webly studio, work index and project stories. Palette follows the CMS theme. */
+.portfolio-projects .ed-print-image::after{display:none!important}
+.portfolio-projects .portfolio-project-logo,.portfolio-projects .talent-sidecard{display:none!important}
+.portfolio-projects .ed-print-grid article#project-talent-hunt .ed-print-image::before{left:5%;top:10%;width:90%;height:clamp(16px,2.2vw,24px)}
+.portfolio-projects .ed-print-grid article#project-talent-hunt .ed-print-image>img{left:5%;top:calc(10% + clamp(16px,2.2vw,24px));width:90%}
 .portfolio-projects .ed-print-grid article#project-talent-hunt{grid-column:auto}
 .portfolio-projects .ed-print-grid article#project-talent-hunt:last-child:nth-child(odd){grid-column:1/-1}
 .portfolio-projects .ed-print-grid article#project-talent-hunt:not(:last-child:nth-child(odd)) .ed-print-image{aspect-ratio:1.05}
