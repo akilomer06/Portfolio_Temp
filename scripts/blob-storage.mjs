@@ -2,20 +2,22 @@ import path from 'node:path';
 import { get, put, del, list, BlobPreconditionFailedError } from '@vercel/blob';
 
 // Each request gets its own ETag map, so a stale save cannot overwrite another request.
-export function createBlobStorage() {
+export function createBlobStorage({getBlob=get,putBlob=put}={}) {
   const etags=new Map();
   const key=name=>'webly/'+name;
   return {
     async read(name,fallback) {
-      const result=await get(key(name),{access:'private',useCache:false});
+      const result=await getBlob(key(name),{access:'private',useCache:false});
       if(!result){etags.set(name,null);return fallback;}
-      etags.set(name,result.blob.etag);
+      // The download CDN marks compressed responses W/"etag". Conditional PUT
+      // expects the underlying object tag ("etag"), not the transfer encoding tag.
+      etags.set(name,result.blob.etag.replace(/^W\//i,''));
       return new Response(result.stream).json();
     },
     async write(name,value) {
       try {
         const etag=etags.get(name);
-        const result=await put(key(name),JSON.stringify(value),{access:'private',addRandomSuffix:false,allowOverwrite:!!etag,contentType:'application/json',cacheControlMaxAge:60,...(etag?{ifMatch:etag}:{})});
+        const result=await putBlob(key(name),JSON.stringify(value),{access:'private',addRandomSuffix:false,allowOverwrite:!!etag,contentType:'application/json',cacheControlMaxAge:60,...(etag?{ifMatch:etag}:{})});
         etags.set(name,result.etag);
       } catch(error) {
         if(error instanceof BlobPreconditionFailedError || error.message?.includes('already exists'))throw Object.assign(new Error('Content changed in another request. Reload and try again.'),{status:409});

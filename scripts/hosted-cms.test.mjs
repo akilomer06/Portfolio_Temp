@@ -3,6 +3,26 @@ import assert from 'node:assert/strict';
 import http from 'node:http';
 import { fileURLToPath } from 'node:url';
 import { createCMS } from './cms-server.mjs';
+import { createBlobStorage } from './blob-storage.mjs';
+import { BlobPreconditionFailedError } from '@vercel/blob';
+
+test('compressed Blob content can be saved while genuinely stale writes are rejected',async()=>{
+  let version=1,value={revision:1};
+  const services={
+    async getBlob(){return {blob:{etag:`W/"version-${version}"`},stream:new Response(JSON.stringify(value)).body};},
+    async putBlob(name,body,options){
+      if(options.ifMatch!==`"version-${version}"`)throw new BlobPreconditionFailedError();
+      value=JSON.parse(body);version++;return {etag:`"version-${version}"`};
+    }
+  };
+  const first=createBlobStorage(services),second=createBlobStorage(services);
+  await first.read('content.json',null);await second.read('content.json',null);
+  await first.write('content.json',{revision:2});
+  assert.equal(value.revision,2);
+  await assert.rejects(second.write('content.json',{revision:3}),error=>error.status===409);
+  await first.write('content.json',{revision:4});
+  assert.equal(value.revision,4);
+});
 
 test('hosted CMS keeps authenticated sessions and published content across fresh requests',async()=>{
   const records=new Map();

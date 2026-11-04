@@ -2,9 +2,9 @@
 
 Run `npm run dev` and open http://localhost:5173. Admin: http://localhost:5173/admin/.
 
-The selected work contains The Quality Kitchen, JRZEES, Prompt Pop 2K26, ACM ROCS 2026, and Talent Hunt 2K26. Homepage screenshots are saved in `dist/media/projects/`. Mobile and desktop use paired cards with a full-width final project.
+The selected work contains The Quality Kitchen, Prompt Pop 2K26, and Talent Hunt 2K26. Homepage screenshots are saved in `dist/media/projects/`. Mobile and desktop use paired cards with a full-width final project.
 
-The header includes Services, Our work, Insights, About, and Let’s talk. The CMS manages the six published pages, five project records, theme colors, fonts, navigation, uploads, and contact inquiries.
+The header includes Services, Our work, Insights, About, and Let’s talk. The CMS manages the six published pages, three project records, theme colors, fonts, navigation, uploads, and contact inquiries.
 
 Use the admin to edit content, colors, fonts, navigation, project descriptions and screenshots, and inquiries. Save a draft, preview it, and publish it to the local site. Runtime data and archived legacy pages are stored in `.local/` and excluded from Git.
 

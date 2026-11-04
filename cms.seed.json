@@ -69,20 +69,6 @@
       "order": 0
     },
     {
-      "id": "jrzees",
-      "name": "JRZEES",
-      "category": "Football storefront",
-      "url": "https://www.jrzees.com/",
-      "image": "/media/projects/jrzees.jpg",
-      "screen": "",
-      "alt": "JRZEES homepage screenshot",
-      "description": "A football-jersey storefront with a dark visual identity, collection navigation, regional currency selection, product browsing, and a shopping bag.",
-      "status": "published",
-      "featured": false,
-      "homeVisible": true,
-      "order": 1
-    },
-    {
       "id": "prompt-pop",
       "name": "Prompt Pop 2K26",
       "category": "Competition platform",
@@ -94,21 +80,7 @@
       "status": "published",
       "featured": false,
       "homeVisible": true,
-      "order": 2
-    },
-    {
-      "id": "acm-rocs",
-      "name": "ACM ROCS 2026",
-      "category": "Workshop website",
-      "url": "https://crescent-acm-2026-tan.vercel.app/",
-      "image": "/media/projects/acm-rocs.jpg",
-      "screen": "",
-      "alt": "ACM ROCS 2026 homepage screenshot",
-      "description": "A website for the ACM India research workshop at Crescent, presenting speakers, the programme, registration information, the venue, and organiser contacts.",
-      "status": "published",
-      "featured": false,
-      "homeVisible": true,
-      "order": 3
+      "order": 1
     },
     {
       "id": "talent-hunt",
@@ -122,7 +94,7 @@
       "status": "published",
       "featured": false,
       "homeVisible": true,
-      "order": 4
+      "order": 2
     }
   ],
   "pages": [
