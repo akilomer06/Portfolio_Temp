@@ -3,16 +3,12 @@ import path from 'node:path';
 import { randomBytes, scrypt as scryptCallback, timingSafeEqual, createHash } from 'node:crypto';
 import { promisify } from 'node:util';
 import { migrateContent } from './content-migrations.mjs';
+import { normalizeURL } from '../dist/cms/urls.mjs';
 const scrypt = promisify(scryptCallback);
 const fonts = new Set(['Hanken', 'Endcap Grotesk', 'Fraunces', 'Arial', 'Georgia', 'system-ui']);
 const copy = value => structuredClone(value);
 const text = (value, max = 10000) => String(value ?? '').slice(0, max);
-const safeURL = value => {
-  const url = text(value, 2000).trim();
-  if (url.startsWith('/') && !url.startsWith('//') && !url.includes('\\')) return url;
-  if (/^(https?:\/\/|mailto:|tel:|#)/i.test(url)) return url;
-  throw Object.assign(new Error('Use a local path or an https, email, or telephone URL.'), { status: 400 });
-};
+const safeURL = (value,options) => normalizeURL(text(value,2000),options);
 const problem = (status, message) => Object.assign(new Error(message), { status });
 const pagePath = value => {
   try {
@@ -64,7 +60,7 @@ export async function createCMS({ root, dataDirectory, cookieName = 'endcap_admi
     const out = copy(seed);
     for (const key of Object.keys(out.settings)) out.settings[key] = text(input.settings?.[key] ?? out.settings[key], 600);
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(out.settings.email)) throw problem(400, 'Enter a valid contact email.');
-    if (out.settings.instagram && !/^https?:\/\/[^\s]+$/i.test(out.settings.instagram)) throw problem(400,'Use a full https URL for your social link.');
+    out.settings.instagram=safeURL(out.settings.instagram,{optional:true,webOnly:true,label:'Instagram URL'});
     for (const key of ['accent','paper','ink','muted','line']) {
       const value = input.theme?.[key];
       if (!/^#[a-f0-9]{6}$/i.test(value || '')) throw problem(400, 'Colors must be six-digit hex values.');
@@ -79,13 +75,13 @@ export async function createCMS({ root, dataDirectory, cookieName = 'endcap_admi
     out.theme.bodySize = Math.max(12, Math.min(24, Number(input.theme.bodySize) || 16));
     out.theme.headingScale = Math.max(.75, Math.min(1.3, Number(input.theme.headingScale) || 1));
     out.theme.animations = input.theme.animations !== false;
-    out.navigation = (input.navigation || []).slice(0, 20).map(item => ({ label: text(item.label, 80), href: safeURL(item.href), visible: item.visible !== false }));
+    out.navigation = (input.navigation || []).slice(0, 20).map(item => ({ label: text(item.label, 80), href: safeURL(item.href,{label:`Navigation link “${text(item.label,80)}”`}), visible: item.visible !== false }));
     const ids = new Set();
     out.projects = input.projects.map((p, index) => {
       if (!/^[a-zA-Z0-9-]{1,80}$/.test(p.id || '') || ids.has(p.id)) throw problem(400, 'Each project needs a unique ID.');
       ids.add(p.id);
       const original = seed.projects.find(item => item.id === p.id);
-      return { id: p.id, name: text(p.name, 150), category: text(p.category, 150), url: safeURL(p.url), image: safeURL(p.image), screen: p.screen ? safeURL(p.screen) : '', alt: text(p.alt, 500), description: text(p.description, 3000), status: p.status === 'draft' ? 'draft' : 'published', featured: !!p.featured, homeVisible: p.homeVisible !== false, order: index, ...(original?.template ? { template: original.template } : {}) };
+      return { id: p.id, name: text(p.name, 150), category: text(p.category, 150), url: safeURL(p.url,{label:`${text(p.name,150) || 'Project'} — Project URL`}), image: safeURL(p.image,{label:`${text(p.name,150) || 'Project'} — Cover image URL`}), screen: safeURL(p.screen,{optional:true,label:`${text(p.name,150) || 'Project'} — Screen overlay URL`}), alt: text(p.alt, 500), description: text(p.description, 3000), status: p.status === 'draft' ? 'draft' : 'published', featured: !!p.featured, homeVisible: p.homeVisible !== false, order: index, ...(original?.template ? { template: original.template } : {}) };
     });
     if (out.projects.filter(p => p.featured && p.status === 'published').length > 1) throw problem(400, 'Only one project can be featured.');
     const inputPages = new Map(input.pages.map(page => [page.path, page]));

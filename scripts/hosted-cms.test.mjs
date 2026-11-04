@@ -5,6 +5,17 @@ import { fileURLToPath } from 'node:url';
 import { createCMS } from './cms-server.mjs';
 import { createBlobStorage } from './blob-storage.mjs';
 import { BlobPreconditionFailedError } from '@vercel/blob';
+import { normalizeURL } from '../dist/cms/urls.mjs';
+
+test('project links accept bare domains and identify invalid fields',()=>{
+  assert.equal(normalizeURL(' nura-woad.vercel.app\u00a0'), 'https://nura-woad.vercel.app/');
+  assert.equal(normalizeURL('www.example.com/work?x=1#about'),'https://www.example.com/work?x=1#about');
+  assert.equal(normalizeURL('https://example.com/path'),'https://example.com/path');
+  assert.equal(normalizeURL('/media/projects/example.jpg'),'/media/projects/example.jpg');
+  assert.equal(normalizeURL('  ',{optional:true}), '');
+  for(const url of ['javascript:alert(1)','data:text/html,test','//example.com','https://','https://example.com\\test','C:\\Users\\image.jpg'])assert.throws(()=>normalizeURL(url,{label:'Nura — Cover image URL'}),/Nura — Cover image URL/);
+  assert.throws(()=>normalizeURL('',{label:'Nura — Cover image URL'}),/Nura — Cover image URL is required/);
+});
 
 test('compressed Blob content can be saved while genuinely stale writes are rejected',async()=>{
   let version=1,value={revision:1};
@@ -51,11 +62,17 @@ test('hosted CMS keeps authenticated sessions and published content across fresh
     const current=(await request('/api/admin/state')).data;
     assert.ok(current.draft);
     current.draft.theme.accent='#afcd12';
+    current.draft.projects[0].url='nura-woad.vercel.app';
+    current.draft.projects[0].screen='   ';
     const saved=await request('/api/admin/draft','PUT',{content:current.draft,revision:current.revision});
     assert.equal(saved.response.status,200);
     assert.equal((await request('/api/admin/preview?path=/')).data.theme.accent,'#afcd12');
+    const draft=(await request('/api/admin/preview?path=/')).data;
+    assert.equal(draft.projects[0].url,'https://nura-woad.vercel.app/');
+    assert.equal(draft.projects[0].screen,'');
     assert.equal((await request('/api/admin/publish','POST',{revision:saved.data.revision})).response.status,200);
     assert.equal((await request('/api/site?path=/')).data.theme.accent,'#afcd12');
+    assert.equal((await request('/api/site?path=/')).data.projects[0].url,'https://nura-woad.vercel.app/');
     assert.equal((await request('/api/admin/logout','POST')).response.status,200);
     assert.equal((await request('/api/admin/state')).response.status,401);
     assert.equal((await request('/api/admin/login','POST',{password:'hosted-test-password-2026'})).response.status,200);

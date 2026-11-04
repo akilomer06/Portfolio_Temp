@@ -27,7 +27,7 @@ http.createServer(async (request, response) => {
     }
     let data = await fs.readFile(filename);
     if (path.extname(filename) === '.html') data = cms.renderHTML(data.toString('utf8'), pathname, request, url);
-    response.writeHead(200, { 'Content-Type': types[path.extname(filename)] || 'application/octet-stream', 'Cache-Control': 'no-cache', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', ...(pathname.startsWith('/admin') ? { 'X-Frame-Options': 'DENY', 'Content-Security-Policy': "default-src 'self'; img-src 'self' https: data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'" } : {}) });
+    response.writeHead(200, { 'Content-Type': path.extname(filename)==='.mjs'?'text/javascript; charset=utf-8':types[path.extname(filename)] || 'application/octet-stream', 'Cache-Control': 'no-cache', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', ...(pathname.startsWith('/admin') ? { 'X-Frame-Options': 'DENY', 'Content-Security-Policy': "default-src 'self'; img-src 'self' https: data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'" } : {}) });
     response.end(data);
   } catch {
     response.writeHead(404, { 'Content-Type': 'text/plain' }).end('Page not found');
