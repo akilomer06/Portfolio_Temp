@@ -44,7 +44,7 @@ test('CMS authentication, publishing, persistence, inbox and recovery', async t 
     let content, revision, originalAccent, originalMapStyle, restoredId;
     await t.test('indexes all existing content and isolates saved drafts',async()=>{
       const loaded=(await request('/api/admin/state')).result;
-      assert.equal(loaded.draft.pages.length,6);assert.equal(loaded.draft.projects.length,3);assert.ok(loaded.media.length>150);
+      assert.equal(loaded.draft.pages.length,6);assert.equal(loaded.draft.projects.length,4);assert.ok(loaded.media.length>150);
       content=loaded.draft;revision=loaded.revision;originalAccent=content.theme.accent;content.theme.accent='#b2d2ff';content.projects[0].name='Updated project';content.pages.find(p=>p.path==='/').title='Published SEO title & details';
       const saved=await request('/api/admin/draft',{method:'PUT',data:{content,revision,section:'Integration check'}});
       assert.equal(saved.response.status,200);revision=saved.result.revision;

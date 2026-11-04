@@ -69,6 +69,20 @@
       "order": 0
     },
     {
+      "id": "nura",
+      "name": "NURA",
+      "category": "Fragrance & commerce",
+      "url": "https://nura-woad.vercel.app/",
+      "image": "/media/projects/nura-cover.svg",
+      "screen": "",
+      "alt": "NURA emerald and gold fragrance cover with the original perfume bottle",
+      "description": "A curated fragrance storefront with an emerald and gold identity, editorial typography, perfume and oil collections, scent details, size selection, a shopping bag, and WhatsApp ordering.",
+      "status": "published",
+      "featured": false,
+      "homeVisible": true,
+      "order": 1
+    },
+    {
       "id": "prompt-pop",
       "name": "Prompt Pop 2K26",
       "category": "Competition platform",
@@ -80,7 +94,7 @@
       "status": "published",
       "featured": false,
       "homeVisible": true,
-      "order": 1
+      "order": 2
     },
     {
       "id": "talent-hunt",
@@ -94,7 +108,7 @@
       "status": "published",
       "featured": false,
       "homeVisible": true,
-      "order": 2
+      "order": 3
     }
   ],
   "pages": [
