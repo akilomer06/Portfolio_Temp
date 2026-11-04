@@ -66,7 +66,25 @@
       "status": "published",
       "featured": true,
       "homeVisible": true,
-      "order": 0
+      "order": 0,
+      "caseStudy": {
+        "headline": "Good food. A considered ordering experience.",
+        "intro": "A food website designed around the moments people gather, with generous photography, editorial type, and a practical route from the menu to an enquiry.",
+        "challenge": "Bring the food, the story, and the ordering details into one place. Visitors need to understand the offering, choose the right portions, and reach the kitchen without a complicated checkout.",
+        "solution": "A photography-led homepage introduces the kitchen and its food. A filterable menu, portion selection, and a gathering basket turn browsing into an organised WhatsApp enquiry.",
+        "scope": [
+          "Website design & development",
+          "Menu and ordering experience",
+          "Responsive interface design"
+        ],
+        "features": [
+          "Food photography and editorial typography",
+          "Filterable menu for finding dishes",
+          "Portion selection and a gathering basket",
+          "WhatsApp ordering and direct enquiries"
+        ],
+        "design": "A dark editorial palette frames the food, while warm accents and large serif headlines give the site the feel of a considered hospitality brand."
+      }
     },
     {
       "id": "nura",
@@ -81,7 +99,25 @@
       "featured": false,
       "homeVisible": true,
       "order": 1,
-      "logo": "/media/projects/nura-logo.png"
+      "logo": "/media/projects/nura-logo.png",
+      "caseStudy": {
+        "headline": "A signature of heritage, translated to the web.",
+        "intro": "A digital storefront for NURA by Bin Sadhik, bringing a curated fragrance collection into an immersive emerald and gold experience.",
+        "challenge": "Give perfume and concentrated perfume oil a shared home while keeping the collection easy to understand. Visitors should be able to explore the character of a fragrance, compare formats, and choose a size.",
+        "solution": "An atmospheric product-led introduction leads into fragrance discovery. Product details, scent notes, format and size selection, and a shopping bag support a personal ordering conversation on WhatsApp.",
+        "scope": [
+          "Fragrance storefront",
+          "Product discovery & ordering",
+          "Responsive interface design"
+        ],
+        "features": [
+          "Perfume and concentrated perfume oil collections",
+          "Fragrance notes and product information",
+          "Format, size, and quantity selection",
+          "Shopping bag and WhatsApp ordering"
+        ],
+        "design": "Deep green textures, a restrained gold accent, and expressive serif typography reflect the existing NURA identity. Product imagery carries the visual story throughout the site."
+      }
     },
     {
       "id": "prompt-pop",
@@ -95,7 +131,25 @@
       "status": "published",
       "featured": false,
       "homeVisible": true,
-      "order": 2
+      "order": 2,
+      "caseStudy": {
+        "headline": "A competition experience with something to play for.",
+        "intro": "An interactive platform for an AI prompting and design competition, organising participant entry and creative challenges into one distinct experience.",
+        "challenge": "Bring several kinds of competition rounds into a single participant journey. Teams need a clear entry point, understandable instructions, and a way to move through each challenge.",
+        "solution": "Team-code entry introduces a sequence of timed and creative rounds, including a quiz, image recreation, a comedy bonus, and logo design, with a route to results.",
+        "scope": [
+          "Competition platform",
+          "Participant interface",
+          "Interactive round design"
+        ],
+        "features": [
+          "Team-code entry",
+          "Timed quiz round",
+          "Image recreation and creative design challenges",
+          "Results access"
+        ],
+        "design": "A bold typographic direction and high-contrast interface make the platform feel like an event while keeping the participant actions clear."
+      }
     },
     {
       "id": "talent-hunt",
@@ -109,7 +163,25 @@
       "status": "published",
       "featured": false,
       "homeVisible": true,
-      "order": 3
+      "order": 3,
+      "caseStudy": {
+        "headline": "One stage. Sixteen ways to stand out.",
+        "intro": "An energetic event website for Crescent CSE, bringing technical and non-technical competitions, schedules, and event information together.",
+        "challenge": "Present sixteen competitions without overwhelming visitors. Participants need to discover the right events and quickly find schedules, venues, FAQs, and the people to contact.",
+        "solution": "A strong event identity anchors the homepage. Organised event discovery and supporting information give each competition a place, with practical details accessible across mobile and desktop.",
+        "scope": [
+          "Event website",
+          "Information architecture",
+          "Responsive design & motion"
+        ],
+        "features": [
+          "Sixteen technical and non-technical competitions",
+          "Event discovery and individual event information",
+          "Schedules, venues, and FAQs",
+          "Coordinator and contact details"
+        ],
+        "design": "Oversized type, expressive colour, and purposeful motion create the energy of a college event while maintaining a consistent structure for its information."
+      }
     }
   ],
   "pages": [
@@ -596,8 +668,8 @@
     },
     {
       "path": "/work/",
-      "title": "Selected work | Webly",
-      "description": "Selected digital projects spanning food, events, e-commerce, and interactive experiences.",
+      "title": "Our work — Websites & digital experiences | Webly",
+      "description": "Explore Webly projects, from fragrance storefronts and food ordering to interactive competition platforms and event websites.",
       "heading": "SELECTED work.",
       "fields": [
         {
@@ -1303,8 +1375,8 @@
     },
     {
       "path": "/services/",
-      "title": "Services | Webly",
-      "description": "Website design, digital products, and e-commerce experiences, thoughtfully built.",
+      "title": "Website design, commerce & digital experiences | Webly",
+      "description": "Explore Webly services: website design and development, commerce, event platforms, visual direction, content management, and launch support.",
       "heading": "Digital experiences, thoughtfully built.",
       "fields": [
         {
@@ -1375,7 +1447,7 @@
           "id": "menu-heading:0",
           "node": "menu-heading",
           "index": 0,
-          "value": "Digital experiences, thoughtfully built.",
+          "value": "GOOD DESIGN. BUILT TO WORK.",
           "group": "Page content",
           "tag": "h1"
         },
@@ -1383,7 +1455,7 @@
           "id": "menu-lead:0",
           "node": "menu-lead",
           "index": 0,
-          "value": "From a first idea to a finished launch, we bring design and development together.",
+          "value": "Websites, storefronts, and digital experiences. We bring design and development together, from the first conversation to the live site.",
           "group": "Page content",
           "tag": "p"
         },
@@ -1686,6 +1758,444 @@
         }
       ],
       "visible": true
+    },
+    {
+      "path": "/services/website-design/",
+      "title": "Website design & development | Webly",
+      "description": "Business websites, portfolios, and redesigns with a clear structure, responsive layouts, and a direct path to getting in touch.",
+      "heading": "Website design & development",
+      "visible": true,
+      "fields": [
+        {
+          "id": "service-title:0",
+          "node": "service-title",
+          "index": 0,
+          "value": "Website design & development",
+          "group": "Introduction",
+          "tag": "h1"
+        },
+        {
+          "id": "service-intro:0",
+          "node": "service-intro",
+          "index": 0,
+          "value": "A considered website, built around your business.",
+          "group": "Introduction",
+          "tag": "p"
+        },
+        {
+          "id": "service-body:0",
+          "node": "service-body",
+          "index": 0,
+          "value": "We bring the content, visual direction, and development together so your website feels consistent from its first impression to its smallest interaction. The work starts with what your visitors need to know and the action you want them to take.",
+          "group": "The approach",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-0:0",
+          "node": "deliverable-0",
+          "index": 0,
+          "value": "Page structure and content planning",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-1:0",
+          "node": "deliverable-1",
+          "index": 0,
+          "value": "Custom desktop and mobile layouts",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-2:0",
+          "node": "deliverable-2",
+          "index": 0,
+          "value": "Responsive development and considered motion",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-3:0",
+          "node": "deliverable-3",
+          "index": 0,
+          "value": "Contact forms and essential search metadata",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "service-outcome:0",
+          "node": "service-outcome",
+          "index": 0,
+          "value": "A complete website that is clear to navigate, distinctive to look at, and ready to share.",
+          "group": "What you leave with",
+          "tag": "h2"
+        }
+      ]
+    },
+    {
+      "path": "/services/ecommerce/",
+      "title": "E-commerce & ordering | Webly",
+      "description": "Product collections, menus, shopping bags, and ordering journeys for independent brands and food businesses.",
+      "heading": "E-commerce & ordering",
+      "visible": true,
+      "fields": [
+        {
+          "id": "service-title:0",
+          "node": "service-title",
+          "index": 0,
+          "value": "E-commerce & ordering",
+          "group": "Introduction",
+          "tag": "h1"
+        },
+        {
+          "id": "service-intro:0",
+          "node": "service-intro",
+          "index": 0,
+          "value": "Turn browsing into a simple ordering experience.",
+          "group": "Introduction",
+          "tag": "p"
+        },
+        {
+          "id": "service-body:0",
+          "node": "service-body",
+          "index": 0,
+          "value": "A good storefront makes products easy to explore and the next step easy to understand. We shape the experience around your catalogue, from photography and product details to variants, quantities, and the right ordering channel for your business.",
+          "group": "The approach",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-0:0",
+          "node": "deliverable-0",
+          "index": 0,
+          "value": "Product or menu catalogue design",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-1:0",
+          "node": "deliverable-1",
+          "index": 0,
+          "value": "Product details, formats, and size selection",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-2:0",
+          "node": "deliverable-2",
+          "index": 0,
+          "value": "Shopping bag and quantity controls",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-3:0",
+          "node": "deliverable-3",
+          "index": 0,
+          "value": "WhatsApp ordering or a scoped checkout integration",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "service-outcome:0",
+          "node": "service-outcome",
+          "index": 0,
+          "value": "An ordering journey that helps visitors choose with confidence and connect with your team.",
+          "group": "What you leave with",
+          "tag": "h2"
+        }
+      ]
+    },
+    {
+      "path": "/services/event-platforms/",
+      "title": "Event & competition websites | Webly",
+      "description": "Launch pages and interactive experiences for events, competitions, workshops, and communities.",
+      "heading": "Event & competition websites",
+      "visible": true,
+      "fields": [
+        {
+          "id": "service-title:0",
+          "node": "service-title",
+          "index": 0,
+          "value": "Event & competition websites",
+          "group": "Introduction",
+          "tag": "h1"
+        },
+        {
+          "id": "service-intro:0",
+          "node": "service-intro",
+          "index": 0,
+          "value": "Give your event a place that brings everything together.",
+          "group": "Introduction",
+          "tag": "p"
+        },
+        {
+          "id": "service-body:0",
+          "node": "service-body",
+          "index": 0,
+          "value": "From the first announcement to the day of the event, participants should be able to find the programme, understand the format, and know what to do next. We turn that information into a coherent website with an identity suited to the occasion.",
+          "group": "The approach",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-0:0",
+          "node": "deliverable-0",
+          "index": 0,
+          "value": "Event identity translated into a responsive website",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-1:0",
+          "node": "deliverable-1",
+          "index": 0,
+          "value": "Event listings, schedules, venues, and FAQs",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-2:0",
+          "node": "deliverable-2",
+          "index": 0,
+          "value": "Registration or team-entry flows",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-3:0",
+          "node": "deliverable-3",
+          "index": 0,
+          "value": "Interactive rounds and participant experiences, where required",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "service-outcome:0",
+          "node": "service-outcome",
+          "index": 0,
+          "value": "A single destination for event information, participant entry, and the experience itself.",
+          "group": "What you leave with",
+          "tag": "h2"
+        }
+      ]
+    },
+    {
+      "path": "/services/interface-design/",
+      "title": "UI & visual direction | Webly",
+      "description": "Typography, colour, layout, and interaction design that make a digital experience feel like one coherent brand.",
+      "heading": "UI & visual direction",
+      "visible": true,
+      "fields": [
+        {
+          "id": "service-title:0",
+          "node": "service-title",
+          "index": 0,
+          "value": "UI & visual direction",
+          "group": "Introduction",
+          "tag": "h1"
+        },
+        {
+          "id": "service-intro:0",
+          "node": "service-intro",
+          "index": 0,
+          "value": "A visual language with a reason behind every detail.",
+          "group": "Introduction",
+          "tag": "p"
+        },
+        {
+          "id": "service-body:0",
+          "node": "service-body",
+          "index": 0,
+          "value": "We work with your existing identity or develop a visual direction for the website. Type, colour, spacing, imagery, and interface patterns are considered together, then tested against the content and the way people move through the site.",
+          "group": "The approach",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-0:0",
+          "node": "deliverable-0",
+          "index": 0,
+          "value": "Digital visual direction and reference exploration",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-1:0",
+          "node": "deliverable-1",
+          "index": 0,
+          "value": "Typography, colour, and spacing systems",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-2:0",
+          "node": "deliverable-2",
+          "index": 0,
+          "value": "Key page and component designs",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-3:0",
+          "node": "deliverable-3",
+          "index": 0,
+          "value": "Hover, scroll, and transition behaviour",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "service-outcome:0",
+          "node": "service-outcome",
+          "index": 0,
+          "value": "A consistent digital identity that carries from the hero section to the final call to action.",
+          "group": "What you leave with",
+          "tag": "h2"
+        }
+      ]
+    },
+    {
+      "path": "/services/cms-integrations/",
+      "title": "Content management & integrations | Webly",
+      "description": "Admin tools and practical integrations for the parts of your website that need to change after launch.",
+      "heading": "Content management & integrations",
+      "visible": true,
+      "fields": [
+        {
+          "id": "service-title:0",
+          "node": "service-title",
+          "index": 0,
+          "value": "Content management & integrations",
+          "group": "Introduction",
+          "tag": "h1"
+        },
+        {
+          "id": "service-intro:0",
+          "node": "service-intro",
+          "index": 0,
+          "value": "A website you can keep up to date.",
+          "group": "Introduction",
+          "tag": "p"
+        },
+        {
+          "id": "service-body:0",
+          "node": "service-body",
+          "index": 0,
+          "value": "We identify the content you need to manage and build an editing flow around it. Projects, images, page copy, and enquiries can have a home in an admin interface, with integrations scoped to the actual systems and workflow you use.",
+          "group": "The approach",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-0:0",
+          "node": "deliverable-0",
+          "index": 0,
+          "value": "Content and project editing interfaces",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-1:0",
+          "node": "deliverable-1",
+          "index": 0,
+          "value": "Media upload and management",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-2:0",
+          "node": "deliverable-2",
+          "index": 0,
+          "value": "Enquiry collection and contact workflows",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-3:0",
+          "node": "deliverable-3",
+          "index": 0,
+          "value": "Draft, preview, and publish flows where required",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "service-outcome:0",
+          "node": "service-outcome",
+          "index": 0,
+          "value": "An editing workflow that puts routine changes within reach without rebuilding the whole website.",
+          "group": "What you leave with",
+          "tag": "h2"
+        }
+      ]
+    },
+    {
+      "path": "/services/launch-care/",
+      "title": "Launch & website care | Webly",
+      "description": "Deployment, domain connection, website updates, and practical support for a site that stays useful.",
+      "heading": "Launch & website care",
+      "visible": true,
+      "fields": [
+        {
+          "id": "service-title:0",
+          "node": "service-title",
+          "index": 0,
+          "value": "Launch & website care",
+          "group": "Introduction",
+          "tag": "h1"
+        },
+        {
+          "id": "service-intro:0",
+          "node": "service-intro",
+          "index": 0,
+          "value": "Ready to launch. Ready for what comes next.",
+          "group": "Introduction",
+          "tag": "p"
+        },
+        {
+          "id": "service-body:0",
+          "node": "service-body",
+          "index": 0,
+          "value": "The launch is part of the project. We prepare the production site, connect the agreed domain, check the main journeys, and hand over the details you need. Ongoing updates can be scoped around the amount of care your website requires.",
+          "group": "The approach",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-0:0",
+          "node": "deliverable-0",
+          "index": 0,
+          "value": "Production deployment and domain connection",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-1:0",
+          "node": "deliverable-1",
+          "index": 0,
+          "value": "Checks across key pages, links, and forms",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-2:0",
+          "node": "deliverable-2",
+          "index": 0,
+          "value": "Basic metadata and sharing previews",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "deliverable-3:0",
+          "node": "deliverable-3",
+          "index": 0,
+          "value": "Handover and separately scoped ongoing updates",
+          "group": "What we can include",
+          "tag": "p"
+        },
+        {
+          "id": "service-outcome:0",
+          "node": "service-outcome",
+          "index": 0,
+          "value": "A live website, a clear handover, and an agreed route for future changes.",
+          "group": "What you leave with",
+          "tag": "h2"
+        }
+      ]
     }
   ]
 }

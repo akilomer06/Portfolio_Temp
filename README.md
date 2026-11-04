@@ -20,3 +20,9 @@ The deployed admin is `/admin/`. Its login is the existing studio administrator 
 
 The homepage intro follows the Accent color and animation toggle, plays once per browser session, and supports reduced motion and Skip/Escape.
 
+## Services and project stories
+
+`/work/` has an accent-coloured project index and cards that lead to `/work/<project-id>/`. Each project story has an overview, brief, approach, scope, features, visual direction, original imagery, a live website link, and next-project navigation. Edit its story in **Admin → Projects → Edit project**.
+
+`/services/` introduces six services, the process, and FAQs. Each service has a page with deliverables and related work. Service page content is editable under **Pages & content**. Service definitions and fallback project stories live in `scripts/portfolio-pages.mjs`; `scripts/build-studio-pages.mjs` generates static fallbacks. Runtime rendering reads the current published CMS data, including images and colours.
+

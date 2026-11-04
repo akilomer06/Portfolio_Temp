@@ -28,7 +28,7 @@ export default async function handler(request,response) {
     if(await cms.handle(request,response,url))return;
     const pathname=url.pathname.endsWith('/')?url.pathname:url.pathname+'/';
     if(!cms.isKnownPage(pathname)||cms.isHidden(pathname,request,url))return response.status(404).end('Page not found');
-    const filename=path.resolve(root,'.'+pathname,'index.html');
+    const filename=path.resolve(root,'.'+cms.templatePath(pathname),'index.html');
     if(!filename.startsWith(path.resolve(root)+path.sep))return response.status(404).end('Page not found');
     const html=cms.renderHTML(await fs.readFile(filename,'utf8'),pathname,request,url);
     response.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff'});

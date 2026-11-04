@@ -65,6 +65,9 @@ test('hosted CMS keeps authenticated sessions and published content across fresh
     current.draft.projects[0].url='nura-woad.vercel.app';
     current.draft.projects[0].screen='   ';
     current.draft.projects[0].logo='/media/projects/nura-logo.png';
+    current.draft.projects[0].caseStudy={headline:'A clear project story',intro:'An overview edited in the admin.',challenge:'The brief.',solution:'The approach.',design:'A considered interface.',scope:['Website design'],features:['A working ordering flow']};
+    const service=current.draft.pages.find(p=>p.path==='/services/website-design/');
+    service.fields.find(field=>field.node==='service-intro').value='A service introduction edited in the admin.';
     const saved=await request('/api/admin/draft','PUT',{content:current.draft,revision:current.revision});
     assert.equal(saved.response.status,200);
     assert.equal((await request('/api/admin/preview?path=/')).data.theme.accent,'#afcd12');
@@ -72,9 +75,12 @@ test('hosted CMS keeps authenticated sessions and published content across fresh
     assert.equal(draft.projects[0].url,'https://nura-woad.vercel.app/');
     assert.equal(draft.projects[0].screen,'');
     assert.equal(draft.projects[0].logo,'/media/projects/nura-logo.png');
+    assert.equal(draft.projects[0].caseStudy.headline,'A clear project story');
     assert.equal((await request('/api/admin/publish','POST',{revision:saved.data.revision})).response.status,200);
     assert.equal((await request('/api/site?path=/')).data.theme.accent,'#afcd12');
     assert.equal((await request('/api/site?path=/')).data.projects[0].url,'https://nura-woad.vercel.app/');
+    assert.deepEqual((await request('/api/site?path=/')).data.projects[0].caseStudy.features,['A working ordering flow']);
+    assert.equal((await request('/api/site?path=/services/website-design/')).data.page.fields.find(field=>field.node==='service-intro').value,'A service introduction edited in the admin.');
     assert.equal((await request('/api/admin/logout','POST')).response.status,200);
     assert.equal((await request('/api/admin/state')).response.status,401);
     assert.equal((await request('/api/admin/login','POST',{password:'hosted-test-password-2026'})).response.status,200);

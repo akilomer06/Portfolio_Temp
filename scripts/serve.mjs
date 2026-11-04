@@ -16,7 +16,8 @@ http.createServer(async (request, response) => {
     if(!pathname.startsWith('/admin')&&!pathname.startsWith('/media/')&&!pathname.startsWith('/cms/')&&(/\.html$/.test(pathname)||!path.posix.extname(pathname))&&!cms.isKnownPage(pathname)){response.writeHead(404,{'Cache-Control':'no-store'}).end('Page not found');return;}
     if (cms.isHidden(pathname, request, url)) { response.writeHead(404,{'Cache-Control':'no-store','X-Robots-Tag':'noindex'}).end(url.searchParams.get('preview')==='draft'?'Sign in to the admin to preview this page.':'Page not found'); return; }
     if (pathname === '/admin') { response.writeHead(302, { Location: '/admin/' }).end(); return; }
-    let filename = path.resolve(root, '.' + pathname);
+    const template=cms.isKnownPage(pathname)?cms.templatePath(pathname):pathname;
+    let filename = path.resolve(root, '.' + template);
     if (filename !== path.resolve(root) && !filename.startsWith(path.resolve(root) + path.sep)) {
       response.writeHead(403).end('Forbidden'); return;
     }

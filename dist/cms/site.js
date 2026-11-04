@@ -7,6 +7,7 @@
     content = await response.json();
   } catch { return; }
   const { theme, settings, projects, navigation, page, hiddenPaths=[] } = content;
+  const projectURL = project => '/work/' + encodeURIComponent(project.id) + '/';
   document.documentElement.dataset.cmsMotion=theme.animations===false?'off':'on';
   document.dispatchEvent(new CustomEvent('cms:settings',{detail:{animations:theme.animations}}));
   const css = document.getElementById('cms-initial-theme') || document.createElement('style');
@@ -60,7 +61,7 @@
   const cover = document.querySelector('.ed-cover');
   const featured = projects.find(p => p.featured && p.status === 'published');
   if (cover && featured) {
-    cover.href = featured.url;
+    cover.href = projectURL(featured); cover.removeAttribute('target');
     if (featured.name !== 'Parker & Associates, Inc.') cover.querySelector('h2').textContent = featured.name;
     cover.querySelector('.ed-cover-lede').textContent = featured.description;
     cover.querySelector('.ed-cover-note span').textContent = featured.category;
@@ -76,7 +77,7 @@
     const capacities = grids.map(g => g.children.length);
     const cards = projects.filter(p => p.status === 'published' && (location.pathname !== '/' || p.homeVisible !== false)).sort((a,b)=>Number(b.featured)-Number(a.featured));
     grids.forEach(g => g.replaceChildren());
-    const projectIndex=document.querySelector('.work-index-items'); if(projectIndex){projectIndex.replaceChildren(...cards.map((p,index)=>{const a=document.createElement('a');a.href='#project-'+p.id;const n=document.createElement('span');n.className='work-index-number';n.textContent=String(index+1).padStart(2,'0');const label=document.createElement('span');label.className='work-index-label';label.textContent=p.category;a.append(n,label);return a;}));const total=document.querySelector('.work-index-total');if(total)total.textContent=String(cards.length).padStart(2,'0')+' PROJECTS';}
+    const projectIndex=document.querySelector('.work-index-items'); if(projectIndex){projectIndex.replaceChildren(...cards.map((p,index)=>{const a=document.createElement('a');a.href=projectURL(p);const n=document.createElement('span');n.className='work-index-number';n.textContent=String(index+1).padStart(2,'0');const label=document.createElement('span');label.className='work-index-label';label.textContent=p.name;a.append(n,label);return a;}));const total=document.querySelector('.work-index-total');if(total)total.textContent=String(cards.length).padStart(2,'0')+' PROJECTS';}
     cards.forEach((p, index) => {
       let article = originals.get(p.id);
       if (!article && sample) {
@@ -87,7 +88,7 @@
       }
       if (!article) return;
       article.dataset.projectId = p.id; article.id = 'project-' + p.id;
-      article.querySelectorAll('a').forEach(a => a.href = p.url);
+      article.querySelectorAll('a').forEach(a => { a.href = projectURL(p); a.removeAttribute('target'); });
       const image = article.querySelector('img');
       if (!image) return;
       const mark=article.querySelector('.ed-print-image'); if(mark) mark.dataset.projectMark=p.name.split(/\s+/).slice(0,2).map(word=>word[0]).join('').toUpperCase();

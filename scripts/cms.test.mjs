@@ -44,7 +44,7 @@ test('CMS authentication, publishing, persistence, inbox and recovery', async t 
     let content, revision, originalAccent, originalMapStyle, restoredId;
     await t.test('indexes all existing content and isolates saved drafts',async()=>{
       const loaded=(await request('/api/admin/state')).result;
-      assert.equal(loaded.draft.pages.length,6);assert.equal(loaded.draft.projects.length,4);assert.ok(loaded.media.length>150);
+      assert.equal(loaded.draft.pages.length,12);assert.equal(loaded.draft.projects.length,4);assert.ok(loaded.media.length>150);
       content=loaded.draft;revision=loaded.revision;originalAccent=content.theme.accent;content.theme.accent='#b2d2ff';content.projects[0].name='Updated project';content.pages.find(p=>p.path==='/').title='Published SEO title & details';
       const saved=await request('/api/admin/draft',{method:'PUT',data:{content,revision,section:'Integration check'}});
       assert.equal(saved.response.status,200);revision=saved.result.revision;
@@ -77,6 +77,24 @@ test('CMS authentication, publishing, persistence, inbox and recovery', async t 
       assert.equal((await request('/api/admin/preview?path=/')).result.theme.accent,originalAccent);
       assert.equal((await request('/api/site?path=/')).result.theme.accent,'#b2d2ff');
     });
+    await t.test('project stories and service pages resolve directly and use internal project links',async()=>{
+      const listing=await (await fetch(origin+'/work/')).text();
+      assert.ok(listing.includes('wb-work-directory'));
+      assert.ok(listing.includes('href="/work/nura/"'));
+      assert.ok(listing.includes('href="/work/quality-kitchen/"'));
+      for(const route of ['/work/nura/','/work/quality-kitchen/','/work/prompt-pop/','/work/talent-hunt/']){
+        const response=await fetch(origin+route);assert.equal(response.status,200);
+        const html=await response.text();assert.ok(html.includes('Visit live website'));assert.ok(html.includes('The brief'));assert.ok(html.includes('Visual direction'));
+        const data=(await request('/api/site?path='+encodeURIComponent(route),{auth:false})).result;
+        assert.equal(data.page.path,route);assert.ok(data.page.project);
+      }
+      assert.equal((await fetch(origin+'/work/not-a-project/')).status,404);
+      assert.equal((await fetch(origin+'/services/not-a-service/')).status,404);
+      for(const route of ['/services/website-design/','/services/ecommerce/','/services/event-platforms/','/services/interface-design/','/services/cms-integrations/','/services/launch-care/']){
+        const response=await fetch(origin+route);assert.equal(response.status,200);const html=await response.text();assert.ok(html.includes('What we can include'));assert.ok(html.includes('/contact/'));
+      }
+      const home=await (await fetch(origin+'/')).text();assert.ok(home.includes('id="services"'));assert.ok(home.includes('/services/ecommerce/'));
+    });
     await t.test('captures real form inquiries and keeps private notes private',async()=>{
       const inquiry=await request('/api/inquiries',{method:'POST',auth:false,data:{name:'QA contact',email:'qa@example.com',message:'A test inquiry',source:'/contact/'}});
       assert.equal(inquiry.response.status,201);
@@ -102,7 +120,7 @@ test('CMS authentication, publishing, persistence, inbox and recovery', async t 
       assert.equal(stored.inquiries[0].notes,'Private note');assert.equal(stored.draft.theme.accent,originalAccent);
       assert.equal((await request('/api/site?path=/')).result.theme.accent,'#b2d2ff');
       const backup=(await request('/api/admin/export')).result;
-      assert.equal(backup.content.pages.length,6);assert.equal(backup.inquiries.length,1);
+      assert.equal(backup.content.pages.length,12);assert.equal(backup.inquiries.length,1);
     });
     await t.test('hides published pages for visitors and signed-in admins, with explicit private previews',async()=>{
       const current=(await request('/api/admin/state')).result;current.draft.navigation.push({label:'About page',href:'/about/',visible:true});
@@ -120,6 +138,8 @@ test('CMS authentication, publishing, persistence, inbox and recovery', async t 
         assert.equal((await fetch(origin+route,{headers:{Cookie:cookie}})).status,404,route+' should stay hidden for an admin outside preview');
       }
       assert.equal((await request('/api/site?path=/about/')).response.status,404);
+      assert.equal((await fetch(origin+'/work/nura/')).status,404,'hiding work also hides its project stories');
+      assert.equal((await request('/api/site?path=/work/nura/',{auth:false})).response.status,404);
       assert.equal((await request('/api/site?path=/about/index.html',{auth:false})).response.status,404);
       assert.equal((await request('/api/admin/preview?path=/about/')).response.status,200);
       assert.equal((await fetch(origin+'/about/?preview=draft',{headers:{Cookie:cookie}})).status,200);

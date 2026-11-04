@@ -13,6 +13,8 @@
     { "src": "/api/(.*)", "dest": "/api/index?__route=/api/$1" },
     { "src": "/media/uploads/(.*)", "dest": "/api/index?__route=/media/uploads/$1" },
     { "src": "/", "dest": "/api/index?__route=/" },
+    { "src": "/work/([a-zA-Z0-9-]+)/?", "dest": "/api/index?__route=/work/$1/" },
+    { "src": "/services/([a-zA-Z0-9-]+)/?", "dest": "/api/index?__route=/services/$1/" },
     { "src": "/(work|services|insights|about|contact)/?", "dest": "/api/index?__route=/$1/" },
     { "src": "/admin/?", "dest": "/admin/index.html" },
     { "handle": "filesystem" }

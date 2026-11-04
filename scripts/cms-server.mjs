@@ -4,6 +4,7 @@ import { randomBytes, scrypt as scryptCallback, timingSafeEqual, createHash } fr
 import { promisify } from 'node:util';
 import { migrateContent } from './content-migrations.mjs';
 import { normalizeURL } from '../dist/cms/urls.mjs';
+import { services, projectPath, projectPageMeta, workPage, casePage, homeServices, servicesPage, servicePage, projectCards } from './portfolio-pages.mjs';
 const scrypt = promisify(scryptCallback);
 const fonts = new Set(['Hanken', 'Endcap Grotesk', 'Fraunces', 'Arial', 'Georgia', 'system-ui']);
 const copy = value => structuredClone(value);
@@ -81,7 +82,10 @@ export async function createCMS({ root, dataDirectory, cookieName = 'endcap_admi
       if (!/^[a-zA-Z0-9-]{1,80}$/.test(p.id || '') || ids.has(p.id)) throw problem(400, 'Each project needs a unique ID.');
       ids.add(p.id);
       const original = seed.projects.find(item => item.id === p.id);
-      return { id: p.id, name: text(p.name, 150), category: text(p.category, 150), url: safeURL(p.url,{label:`${text(p.name,150) || 'Project'} — Project URL`}), image: safeURL(p.image,{label:`${text(p.name,150) || 'Project'} — Cover image URL`}), logo: safeURL(p.logo,{optional:true,label:`${text(p.name,150) || 'Project'} — Project logo URL`}), screen: safeURL(p.screen,{optional:true,label:`${text(p.name,150) || 'Project'} — Screen overlay URL`}), alt: text(p.alt, 500), description: text(p.description, 3000), status: p.status === 'draft' ? 'draft' : 'published', featured: !!p.featured, homeVisible: p.homeVisible !== false, order: index, ...(original?.template ? { template: original.template } : {}) };
+      const study=p.caseStudy || original?.caseStudy || {};
+      const caseStudy=Object.fromEntries(['headline','intro','challenge','solution','design'].map(key=>[key,text(study[key],6000)]).filter(([,value])=>value.trim()));
+      for(const key of ['scope','features'])if(Array.isArray(study[key]))caseStudy[key]=study[key].slice(0,12).map(value=>text(value,500)).filter(Boolean);
+      return { id: p.id, name: text(p.name, 150), category: text(p.category, 150), url: safeURL(p.url,{label:`${text(p.name,150) || 'Project'} — Project URL`}), image: safeURL(p.image,{label:`${text(p.name,150) || 'Project'} — Cover image URL`}), logo: safeURL(p.logo,{optional:true,label:`${text(p.name,150) || 'Project'} — Project logo URL`}), screen: safeURL(p.screen,{optional:true,label:`${text(p.name,150) || 'Project'} — Screen overlay URL`}), alt: text(p.alt, 500), description: text(p.description, 3000), caseStudy, status: p.status === 'draft' ? 'draft' : 'published', featured: !!p.featured, homeVisible: p.homeVisible !== false, order: index, ...(original?.template ? { template: original.template } : {}) };
     });
     if (out.projects.filter(p => p.featured && p.status === 'published').length > 1) throw problem(400, 'Only one project can be featured.');
     const inputPages = new Map(input.pages.map(page => [page.path, page]));
@@ -116,23 +120,38 @@ export async function createCMS({ root, dataDirectory, cookieName = 'endcap_admi
   const status = request => ({ authenticated: !!session(request), setupRequired: !admin, displayName: admin?.displayName || 'Studio admin' });
   const hiddenPaths = content => content.pages.filter(page=>page.visible===false).map(page=>page.path);
   const targetHidden = (href, content) => href?.startsWith('/') && !href.startsWith('//') && hiddenPaths(content).includes(pagePath(href));
+  const pageFor=(content,pathname)=>content.pages.find(p=>p.path===pagePath(pathname)) || projectPageMeta(content,pagePath(pathname));
   const snapshot = (content,pathname,preview=false) => ({
     settings:content.settings,theme:content.theme,
     projects:content.projects.filter(p=>p.status==='published'&&!targetHidden(p.url,content)).map(({template,...p})=>p),
     navigation:content.navigation.filter(n=>n.visible&&!targetHidden(n.href,content)),
-    hiddenPaths:hiddenPaths(content),page:content.pages.find(p=>p.path===pagePath(pathname)),version:state.revision,...(preview?{preview:true}:{})
+    hiddenPaths:hiddenPaths(content),page:pageFor(content,pathname),version:state.revision,...(preview?{preview:true}:{})
   });
   return {
-    isKnownPage(pathname) { return state.published.pages.some(p=>p.path===pagePath(pathname)); },
+    isKnownPage(pathname) { return !!pageFor(state.published,pathname) || !!pageFor(state.draft,pathname); },
+    templatePath(pathname) { const route=pagePath(pathname);return /^\/work\/[^/]+\/$/.test(route)?'/work/':/^\/services\/[^/]+\/$/.test(route)?'/services/':route; },
     isHidden(pathname, request, url) {
       const preview=url?.searchParams.get('preview')==='draft';
-      if(preview)return !session(request);
-      return state.published.pages.find(p=>p.path===pagePath(pathname))?.visible===false;
+      const content=preview?state.draft:state.published;
+      if(preview&&!session(request))return true;
+      const page=pageFor(content,pathname);
+      if(!page)return /^\/(?:work|services)\/[^/]+\/$/.test(pagePath(pathname));
+      if(page.project)return (!preview && page.project.status!=='published') || content.pages.find(p=>p.path==='/work/')?.visible===false;
+      if(page.path.startsWith('/services/')&&page.path!=='/services/'&&content.pages.find(p=>p.path==='/services/')?.visible===false)return true;
+      return !preview && page.visible===false;
     },
     renderHTML(html, pathname, request, url) {
       const content = url.searchParams.get('preview') === 'draft' && session(request) ? state.draft : state.published;
-      const page = content.pages.find(p => p.path === pagePath(pathname));
+      const page = pageFor(content,pathname);
       if (!page) return html;
+      const service=services.find(item=>page.path==='/services/'+item.id+'/');
+      const main=page.project?casePage(page.project,content):page.path==='/work/'?workPage(content):page.path==='/services/'?servicesPage(page):service?servicePage(service,page,content):null;
+      if(main!==null)html=html.replace(/<main\b[^>]*>[\s\S]*?<\/main>/i,`<main id="main">${main}</main>`);
+      if(page.path==='/'){
+        html=html.replace(/<section\b[^>]*data-webly-home-services[^>]*>[\s\S]*?<\/section>/,homeServices());
+        html=html.replace(/<section\b[^>]*data-webly-projects[^>]*>[\s\S]*?<\/section>/,projectCards(content.projects.filter(p=>p.status==='published'&&p.homeVisible!==false)));
+      }
+      if(!html.includes('/cms/studio.css'))html=html.replace('</head>','<link rel="stylesheet" href="/cms/studio.css"></head>');
       const escape = value => String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
       // Apply the saved palette before the first paint, without waiting for /api/site.
       const palette = Object.fromEntries(['accent','paper','ink','muted','line'].map(key => [key, /^#[a-f0-9]{6}$/i.test(content.theme[key]) ? content.theme[key] : seed.theme[key]]));
@@ -157,6 +176,11 @@ export async function createCMS({ root, dataDirectory, cookieName = 'endcap_admi
         else if (/(?:name|property)=["'](?:og:title|twitter:title)["']/i.test(tag)) value=page.title;
         return value === undefined ? tag : tag.replace(/content=(["'])[\s\S]*?\1/i,()=>`content="${escape(value)}"`);
       });
+      html=html.replace(/<a\b[^>]*\bhref=(["'])(.*?)\1[^>]*>/gi,(tag,quote,href)=>{
+        const project=content.projects.find(p=>p.url===href);
+        if(!project||page.project)return tag;
+        return tag.replace(/href=(["']).*?\1/,`href="${projectPath(project)}"`).replace(/\s+target=(["']).*?\1/,'');
+      });
       html=html.replace(/<article\b[^>]*data-project-id=["'][^"']+["'][^>]*>[\s\S]*?<\/article>/gi,article=>{
         const href=/\bhref=["']([^"']+)["']/.exec(article)?.[1];return targetHidden(href,content)?'':article;
       });
@@ -171,7 +195,7 @@ export async function createCMS({ root, dataDirectory, cookieName = 'endcap_admi
         if (route === '/api/site' && request.method === 'GET') {
           const content = state.published;
           const data=snapshot(content,url.searchParams.get('path'));
-          if(!data.page||data.page.visible===false)throw problem(404,'Page not found.');
+          if(!data.page||data.page.visible===false || (data.page.project&&state.published.pages.find(p=>p.path==='/work/')?.visible===false))throw problem(404,'Page not found.');
           return json(response, 200, data), true;
         }
         if (route === '/api/admin/session' && request.method === 'GET') return json(response, 200, status(request)), true;
