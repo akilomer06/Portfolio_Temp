@@ -15,8 +15,10 @@
     { "src": "/", "dest": "/api/index?__route=/" },
     { "src": "/work/([a-zA-Z0-9-]+)/?", "dest": "/api/index?__route=/work/$1/" },
     { "src": "/services/([a-zA-Z0-9-]+)/?", "dest": "/api/index?__route=/services/$1/" },
-    { "src": "/(work|services|insights|about|contact)/?", "dest": "/api/index?__route=/$1/" },
+    { "src": "/insights/([a-zA-Z0-9-]+)/?", "dest": "/api/index?__route=/insights/$1/" },
+    { "src": "/(work|services|insights|about|contact|privacy|terms|accessibility)/?", "dest": "/api/index?__route=/$1/" },
     { "src": "/admin/?", "dest": "/admin/index.html" },
-    { "handle": "filesystem" }
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "status": 404, "dest": "/404.html" }
   ]
 }

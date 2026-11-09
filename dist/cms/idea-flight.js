@@ -12,6 +12,7 @@
   const pause = section.querySelector('[data-flight-pause]');
   const replay = section.querySelector('[data-flight-replay]');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const connection = navigator.connection;
   const small = matchMedia('(max-width:650px)');
   const shapes = {
     top: { flat:[[32,-42],[-32,-42],[-32,42]], folded:[[46,0],[-38,-30],[-15,0]] },
@@ -26,7 +27,7 @@
   const mobilePath = 'M88 112C176 44 342 62 326 146C310 229 150 232 156 151C161 78 277 128 248 204C224 265 252 279 300 306';
   let length=1, elapsed=6500, previousTime=0, frame=0, visible=false, userPaused=false, entered=false;
   let motionEnabled=document.documentElement.dataset.cmsMotion!=='off';
-  const allowed = () => motionEnabled&&!reduced.matches;
+  const allowed = () => motionEnabled && !reduced.matches && !connection?.saveData && !['slow-2g','2g','3g'].includes(connection?.effectiveType);
   const active = () => allowed()&&visible&&!document.hidden&&!userPaused;
   let previousStage=-1;
   function geometry() {
@@ -82,6 +83,7 @@
     previousTime=now;paint(elapsed);frame=requestAnimationFrame(tick);
   }
   function sync() {
+    section.toggleAttribute('data-audit-static', !allowed());
     pause.disabled=!allowed();replay.disabled=!allowed();
     pause.setAttribute('aria-label',userPaused?'Play paper plane animation':'Pause paper plane animation');
     pause.setAttribute('aria-pressed',String(userPaused));
@@ -94,6 +96,7 @@
   pause.addEventListener('click',()=>{userPaused=!userPaused;sync();});
   replay.addEventListener('click',()=>{elapsed=0;previousStage=-1;userPaused=false;paint(0);sync();});
   reduced.addEventListener('change',()=>{previousStage=-1;sync();});
+  connection?.addEventListener('change', sync);
   small.addEventListener('change',geometry);
   document.addEventListener('visibilitychange',sync);
   document.addEventListener('cms:settings',event=>{motionEnabled=event.detail.animations!==false;previousStage=-1;sync();});

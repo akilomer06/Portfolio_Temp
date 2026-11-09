@@ -1,9 +1,11 @@
 (() => {
   const root = document.documentElement;
   const config = document.querySelector('meta[name="webly-intro"]');
-  if (!config || location.hash || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const connection = navigator.connection;
+  if (!config || location.hash || matchMedia('(prefers-reduced-motion: reduce)').matches
+      || connection?.saveData || ['slow-2g', '2g', '3g'].includes(connection?.effectiveType)) return;
   const key = 'webly:intro:v1:' + config.content;
-  try { if (sessionStorage.getItem(key)) return; } catch { /* Storage may be disabled. */ }
+  try { if (sessionStorage.getItem(key)) return; } catch { return; }
   root.dataset.weblyIntro = 'pending';
 
   let overlay, timer, originalOverflow, inertNodes = [];
@@ -30,20 +32,22 @@
   document.addEventListener('DOMContentLoaded', async () => {
     overlay = document.querySelector('.webly-intro');
     if (!overlay || finished) return finish();
-    overlay.querySelector('button')?.addEventListener('click', finish);
+    const skip = overlay.querySelector('button');
+    skip?.addEventListener('click', finish);
     originalOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     inertNodes = [...document.body.children].filter(node => node !== overlay && !['SCRIPT', 'STYLE', 'LINK'].includes(node.tagName)).map(node => [node, node.inert]);
     inertNodes.forEach(([node]) => { node.inert = true; });
+    skip?.focus({ preventScroll: true });
     // Keep the wordmark steady while the local display font becomes available.
-    await Promise.race([document.fonts.ready, new Promise(resolve => setTimeout(resolve, 300))]);
+    await Promise.race([document.fonts.ready, new Promise(resolve => setTimeout(resolve, 150))]);
     if (finished) return;
     try { sessionStorage.setItem(key, 'seen'); } catch { /* The intro still works without storage. */ }
     requestAnimationFrame(() => {
       if (finished) return;
       root.dataset.weblyIntro = 'running';
       clearTimeout(timer);
-      timer = setTimeout(finish, 1950);
+      timer = setTimeout(finish, 1330);
     });
   }, { once: true });
 })();

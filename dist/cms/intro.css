@@ -17,11 +17,11 @@ html[data-webly-intro] .webly-intro{display:flex;position:fixed;inset:0;z-index:
 .webly-intro-bottom{position:relative;padding-top:18px;opacity:.7}
 .webly-intro-track{position:absolute;top:0;left:0;right:0;height:1px;background:currentColor;opacity:.22}
 .webly-intro-progress{position:absolute;top:0;left:0;right:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left}
-html[data-webly-intro="running"] .webly-intro-letter{animation:webly-intro-letter .75s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--letter-index)*55ms + 80ms)}
-html[data-webly-intro="running"] .webly-intro-period{animation:webly-intro-period .55s cubic-bezier(.22,1,.36,1) .5s both}
-html[data-webly-intro="running"] .webly-intro-caption{animation:webly-intro-caption .5s ease .55s both}
-html[data-webly-intro="running"] .webly-intro-progress{animation:webly-intro-progress 1.25s cubic-bezier(.65,0,.35,1) both}
-html[data-webly-intro="running"] .webly-intro{animation:webly-intro-exit .65s cubic-bezier(.76,0,.24,1) 1.25s both,webly-intro-safety 0s 5s forwards}
+html[data-webly-intro="running"] .webly-intro-letter{animation:webly-intro-letter .52s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--letter-index)*42ms + 55ms)}
+html[data-webly-intro="running"] .webly-intro-period{animation:webly-intro-period .4s cubic-bezier(.22,1,.36,1) .32s both}
+html[data-webly-intro="running"] .webly-intro-caption{animation:webly-intro-caption .35s ease .34s both}
+html[data-webly-intro="running"] .webly-intro-progress{animation:webly-intro-progress .82s cubic-bezier(.65,0,.35,1) both}
+html[data-webly-intro="running"] .webly-intro{animation:webly-intro-exit .46s cubic-bezier(.76,0,.24,1) .82s both,webly-intro-safety 0s 5s forwards}
 @keyframes webly-intro-letter{to{transform:translateY(0);opacity:1}}
 @keyframes webly-intro-period{0%{transform:scale(0);opacity:0}65%{transform:scale(1.2);opacity:1}100%{transform:scale(1);opacity:1}}
 @keyframes webly-intro-caption{to{transform:translateY(0);opacity:.7}}

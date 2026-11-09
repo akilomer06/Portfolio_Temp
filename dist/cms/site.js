@@ -41,7 +41,7 @@
   document.querySelectorAll('a[href^="tel:"]').forEach(el => { el.href = 'tel:' + settings.phoneLink; el.textContent = settings.phone; });
   const copyright = document.querySelector('.footer-bottom > span'); if (copyright) copyright.textContent = settings.copyright;
   const tagline = document.querySelector('.ed-issue-line p'); if (tagline) tagline.textContent = settings.tagline;
-  if (location.pathname === '/contact/') {
+  if (location.pathname === '/contact/' && !document.querySelector('[data-audit-contact]')) {
     const form = document.querySelector('#review-form');
     if (form) {
       const details = document.createElement('p');
@@ -70,7 +70,7 @@
     const screen = cover.querySelector('.ed-device-screen');
     if (screen) { screen.hidden = !featured.screen; if (featured.screen && screen.getAttribute('src') !== featured.screen) { screen.src = featured.screen; screen.removeAttribute('srcset'); } screen.alt = featured.alt; }
   } else if (cover) cover.hidden = true;
-  const grids = [...document.querySelectorAll('.ed-print-grid')];
+  const grids = [...document.querySelectorAll('.ed-print-grid')].filter(grid => !grid.closest('.audit-projects'));
   if (grids.length && ['/', '/work/'].includes(location.pathname)) {
     const originals = new Map([...document.querySelectorAll('[data-project-id]')].map(el => [el.dataset.projectId, el]));
     const sample = document.querySelector('.ed-print-grid article');

@@ -4,7 +4,11 @@ import { randomBytes, scrypt as scryptCallback, timingSafeEqual, createHash } fr
 import { promisify } from 'node:util';
 import { migrateContent } from './content-migrations.mjs';
 import { normalizeURL } from '../dist/cms/urls.mjs';
-import { services, projectPath, projectPageMeta, workPage, casePage, homeServices, servicesPage, servicePage, projectCards } from './portfolio-pages.mjs';
+import { services, projectPath, projectPageMeta } from './portfolio-pages.mjs';
+import { applyAuditDefaults, aboutPage, closingSection, contactOptions, contactPage, enquiryResponse, homeOpening, socialLinks, studioLinks, teamSection, externalLink, escapeHTML } from './site-audit.mjs';
+import { applyPortfolioFacts, editableProjectFacts, auditHomeWork, auditWorkPage, auditCasePage, auditPackages, auditProcess, auditFAQ, auditServicesPage, auditServicePage } from './portfolio-audit.mjs';
+import { publicCopyMain, publicCopyPage } from './public-copy.mjs';
+import { deliverEnquiryMail } from './enquiry-mail.mjs';
 const scrypt = promisify(scryptCallback);
 const fonts = new Set(['Hanken', 'Endcap Grotesk', 'Fraunces', 'Arial', 'Georgia', 'system-ui']);
 const copy = value => structuredClone(value);
@@ -23,6 +27,8 @@ const pagePath = value => {
 export async function createCMS({ root, dataDirectory, cookieName = 'endcap_admin', storage = null, publicOrigin = null }) {
   if (!storage) await fs.mkdir(dataDirectory, { recursive: true });
   const seed = JSON.parse(await fs.readFile(path.join(root, '../cms.seed.json'), 'utf8'));
+  applyAuditDefaults(seed);
+  applyPortfolioFacts(seed);
   const storeFile = path.join(dataDirectory, 'content.json');
   const authFile = path.join(dataDirectory, 'admin.json');
   const read = async (file, fallback) => { if (storage && [storeFile,authFile].includes(file)) return storage.read(path.basename(file),fallback); try { return JSON.parse(await fs.readFile(file, 'utf8')); } catch (error) { if (error.code === 'ENOENT') return fallback; throw error; } };
@@ -44,24 +50,38 @@ export async function createCMS({ root, dataDirectory, cookieName = 'endcap_admi
     if(changed){state.revisions.unshift({id:randomBytes(10).toString('hex'),at:new Date().toISOString(),label:'Before India / worldwide update',content:previous});state.revisions=state.revisions.slice(0,12);state.revision++;log('Studio location updated','India / worldwide map');}
     await atomic(storeFile,state);
   }
+  const auditMigration = '2026-11-webly-portfolio-audit';
+  if (!(state.appliedMigrations || []).includes(auditMigration)) {
+    const previous = copy(state.published);
+    const changed = applyAuditDefaults(state.published) + applyAuditDefaults(state.draft)
+      + applyPortfolioFacts(state.published) + applyPortfolioFacts(state.draft);
+    state.appliedMigrations = [...(state.appliedMigrations || []), auditMigration];
+    if (changed) {
+      state.revisions = [{ id: randomBytes(10).toString('hex'), at: new Date().toISOString(), label: 'Before portfolio audit update', content: previous }, ...state.revisions].slice(0, 12);
+      state.revision++;
+      log('Portfolio audit defaults applied');
+    }
+    await atomic(storeFile, state);
+  }
   const json = (response, status, body) => { response.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' }); response.end(JSON.stringify(body)); };
   const body = async (request, limit = 25 * 1024 * 1024) => { const chunks = []; let bytes = 0; for await (const chunk of request) { bytes += chunk.length; if (bytes > limit) throw problem(413, 'This file is too large. The limit is 25 MB.'); chunks.push(chunk); } return Buffer.concat(chunks); };
-  const payload = async request => { try { return JSON.parse((await body(request, 16 * 1024 * 1024)).toString()); } catch (error) { if (error.status) throw error; throw problem(400, 'Invalid JSON.'); } };
+  const payload = async (request, limit = 16 * 1024 * 1024) => { try { return JSON.parse((await body(request, limit)).toString()); } catch (error) { if (error.status) throw error; throw problem(400, 'Invalid JSON.'); } };
   const tokenFrom = request => new RegExp('(?:^|;\\s*)'+cookieName+'=([a-f0-9]+)').exec(request.headers.cookie || '')?.[1];
   const session = request => { const cookie = tokenFrom(request); const entry = sessions.get(cookie); if (entry && entry.expires > Date.now()) return entry; if (cookie) sessions.delete(cookie); return null; };
   const issueSession = async response => { const token = randomBytes(32).toString('hex'); const entry={ expires: Date.now() + 12 * 3600000, credentialVersion:admin.hash }; sessions.set(token,entry); if(storage)await storage.write('sessions/'+token+'.json',entry); response.setHeader('Set-Cookie', `${cookieName}=${token}; HttpOnly; SameSite=Strict; Path=/; Max-Age=43200${publicOrigin?'; Secure':''}`); };
-  const sameOrigin = request => {
+  const sameOrigin = (request, nativeForm = false) => {
     const expectedOrigin=publicOrigin || `http://${request.headers.host}`;
     if (!publicOrigin && !/^localhost(?::\d+)?$|^127\.0\.0\.1(?::\d+)?$/.test(request.headers.host || '')) throw problem(403, 'Use the localhost address to manage this site.');
     if (request.headers.origin && request.headers.origin !== expectedOrigin) throw problem(403, 'Cross-origin requests are not allowed.');
-    if (!['GET', 'HEAD'].includes(request.method) && request.headers['x-cms-request'] !== '1') throw problem(403, 'The request could not be verified. Reload the dashboard.');
+    if (request.headers['sec-fetch-site'] === 'cross-site') throw problem(403, 'Cross-origin requests are not allowed.');
+    if (!nativeForm && !['GET', 'HEAD'].includes(request.method) && request.headers['x-cms-request'] !== '1') throw problem(403, 'The request could not be verified. Reload the dashboard.');
   };
   function validate(input) {
     if (!input || input.schema !== 1 || !Array.isArray(input.projects) || !Array.isArray(input.pages) || input.projects.length > 300) throw problem(400, 'This is not a valid site content file.');
     const out = copy(seed);
     for (const key of Object.keys(out.settings)) out.settings[key] = text(input.settings?.[key] ?? out.settings[key], 600);
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(out.settings.email)) throw problem(400, 'Enter a valid contact email.');
-    out.settings.instagram=safeURL(out.settings.instagram,{optional:true,webOnly:true,label:'Instagram URL'});
+    for (const key of studioLinks) out.settings[key] = safeURL(out.settings[key], {optional:true,webOnly:true,label:key});
     for (const key of ['accent','paper','ink','muted','line']) {
       const value = input.theme?.[key];
       if (!/^#[a-f0-9]{6}$/i.test(value || '')) throw problem(400, 'Colors must be six-digit hex values.');
@@ -85,6 +105,9 @@ export async function createCMS({ root, dataDirectory, cookieName = 'endcap_admi
       const study=p.caseStudy || original?.caseStudy || {};
       const caseStudy=Object.fromEntries(['headline','intro','challenge','solution','design'].map(key=>[key,text(study[key],6000)]).filter(([,value])=>value.trim()));
       for(const key of ['scope','features'])if(Array.isArray(study[key]))caseStudy[key]=study[key].slice(0,12).map(value=>text(value,500)).filter(Boolean);
+      if (study.facts && typeof study.facts === 'object') {
+        caseStudy.facts = Object.fromEntries(editableProjectFacts.map(key => [key, text(study.facts[key], 1000).trim()]).filter(([, value]) => value));
+      }
       return { id: p.id, name: text(p.name, 150), category: text(p.category, 150), url: safeURL(p.url,{label:`${text(p.name,150) || 'Project'} — Project URL`}), image: safeURL(p.image,{label:`${text(p.name,150) || 'Project'} — Cover image URL`}), logo: safeURL(p.logo,{optional:true,label:`${text(p.name,150) || 'Project'} — Project logo URL`}), screen: safeURL(p.screen,{optional:true,label:`${text(p.name,150) || 'Project'} — Screen overlay URL`}), alt: text(p.alt, 500), description: text(p.description, 3000), caseStudy, status: p.status === 'draft' ? 'draft' : 'published', featured: !!p.featured, homeVisible: p.homeVisible !== false, order: index, ...(original?.template ? { template: original.template } : {}) };
     });
     if (out.projects.filter(p => p.featured && p.status === 'published').length > 1) throw problem(400, 'Only one project can be featured.');
@@ -120,7 +143,14 @@ export async function createCMS({ root, dataDirectory, cookieName = 'endcap_admi
   const status = request => ({ authenticated: !!session(request), setupRequired: !admin, displayName: admin?.displayName || 'Studio admin' });
   const hiddenPaths = content => content.pages.filter(page=>page.visible===false).map(page=>page.path);
   const targetHidden = (href, content) => href?.startsWith('/') && !href.startsWith('//') && hiddenPaths(content).includes(pagePath(href));
-  const pageFor=(content,pathname)=>content.pages.find(p=>p.path===pagePath(pathname)) || projectPageMeta(content,pagePath(pathname));
+  const pageFor = (content, pathname) => {
+    const route = pagePath(pathname);
+    return content.pages.find(page => page.path === route) || projectPageMeta(content, route) || publicCopyPage(content, route);
+  };
+  const countEvent = event => {
+    state.conversions ||= { enquiries: 0, whatsapp: 0 };
+    state.conversions[event] = (state.conversions[event] || 0) + 1;
+  };
   const snapshot = (content,pathname,preview=false) => ({
     settings:content.settings,theme:content.theme,
     projects:content.projects.filter(p=>p.status==='published'&&!targetHidden(p.url,content)).map(({template,...p})=>p),
@@ -129,7 +159,14 @@ export async function createCMS({ root, dataDirectory, cookieName = 'endcap_admi
   });
   return {
     isKnownPage(pathname) { return !!pageFor(state.published,pathname) || !!pageFor(state.draft,pathname); },
-    templatePath(pathname) { const route=pagePath(pathname);return /^\/work\/[^/]+\/$/.test(route)?'/work/':/^\/services\/[^/]+\/$/.test(route)?'/services/':route; },
+    templatePath(pathname) {
+      const route = pagePath(pathname);
+      if (/^\/work\/[^/]+\/$/.test(route)) return '/work/';
+      if (/^\/services\/[^/]+\/$/.test(route)) return '/services/';
+      if (/^\/insights\/[^/]+\/$/.test(route)) return '/insights/';
+      if (['/privacy/', '/terms/', '/accessibility/'].includes(route)) return '/about/';
+      return route;
+    },
     isHidden(pathname, request, url) {
       const preview=url?.searchParams.get('preview')==='draft';
       const content=preview?state.draft:state.published;
@@ -138,6 +175,7 @@ export async function createCMS({ root, dataDirectory, cookieName = 'endcap_admi
       if(!page)return /^\/(?:work|services)\/[^/]+\/$/.test(pagePath(pathname));
       if(page.project)return (!preview && page.project.status!=='published') || content.pages.find(p=>p.path==='/work/')?.visible===false;
       if(page.path.startsWith('/services/')&&page.path!=='/services/'&&content.pages.find(p=>p.path==='/services/')?.visible===false)return true;
+      if(!preview && page.path.startsWith('/insights/') && content.pages.find(p=>p.path==='/insights/')?.visible===false)return true;
       return !preview && page.visible===false;
     },
     renderHTML(html, pathname, request, url) {
@@ -145,12 +183,45 @@ export async function createCMS({ root, dataDirectory, cookieName = 'endcap_admi
       const page = pageFor(content,pathname);
       if (!page) return html;
       const service=services.find(item=>page.path==='/services/'+item.id+'/');
-      const main=page.project?casePage(page.project,content):page.path==='/work/'?workPage(content):page.path==='/services/'?servicesPage(page):service?servicePage(service,page,content):null;
-      if(main!==null)html=html.replace(/<main\b[^>]*>[\s\S]*?<\/main>/i,`<main id="main">${main}</main>`);
+      let main = page.project ? auditCasePage(page.project, content)
+        : page.path === '/work/' ? auditWorkPage(content)
+        : page.path === '/services/' ? auditServicesPage(page, content)
+        : page.path === '/about/' ? aboutPage(page, content)
+        : page.path === '/contact/' ? contactPage(content.settings)
+        : service ? auditServicePage(service, page, content)
+        : publicCopyMain(content, page);
       if(page.path==='/'){
-        html=html.replace(/<section\b[^>]*data-webly-home-services[^>]*>[\s\S]*?<\/section>/,homeServices());
-        html=html.replace(/<section\b[^>]*data-webly-projects[^>]*>[\s\S]*?<\/section>/,projectCards(content.projects.filter(p=>p.status==='published'&&p.homeVisible!==false)));
+        const flight = html.match(/<section\b[^>]*id="ideas-in-flight"[^>]*>[\s\S]*?<\/section>/)?.[0] || '';
+        main = homeOpening(content, page) + auditPackages(content.settings, true) + auditHomeWork(content)
+          + auditProcess() + teamSection() + auditFAQ(content.settings, true)
+          + flight.replace('IDEAS WITHOUT BORDERS.', 'DESIGN AND DEVELOPMENT.').replace('Small beginnings. Big possibilities.', 'From a brief to a live website.')
+          + closingSection(content.settings);
       }
+      if (main !== null) html = html.replace(/<main\b[^>]*>[\s\S]*?<\/main>/i, () => `<main id="main" tabindex="-1">${main}</main>`);
+      html = html.replace(/<script\b[^>]*src="https:\/\/static\.cloudflareinsights\.com\/[^"]*"[^>]*>[\s\S]*?<\/script>/gi, '');
+      html = html.replace(/<script\b[^>]*src="\/recreation\.js"[^>]*>[\s\S]*?<\/script>/gi, '');
+      html = html.replace(/<script\b[^>]*src="\/media\/ai-site-20260912\/(?:interactions|motion|growth)\.[^"]+"[^>]*>[\s\S]*?<\/script>/gi, '');
+      html = html.replace(/<link\b[^>]*href="\/cms\/(?:audit|intro)\.css"[^>]*>|<script\b[^>]*src="\/cms\/(?:audit|intro)\.js"[^>]*>[\s\S]*?<\/script>|<meta\b[^>]*name="webly-intro"[^>]*>|<section\b[^>]*class="webly-intro"[^>]*>[\s\S]*?<\/section>|<style\b[^>]*id="cms-initial-theme"[^>]*>[\s\S]*?<\/style>/gi, '');
+      html = html.replace(/<a\b[^>]*class="audit-button audit-skip"[^>]*>[\s\S]*?<\/a>|<div class="audit-footer-extra">[\s\S]*?<\/div>|<nav class="audit-social"[^>]*>[\s\S]*?<\/nav>(?=<div class="footer-bottom")/gi, '');
+      html = html.replace('</head>', '<link rel="stylesheet" href="/cms/audit.css"><script src="/cms/audit.js" defer></script></head>');
+      html = html.replace(/(<header\b[^>]*class="mast") data-enhanced="true"/i, '$1');
+      html = html.replace(/(<header\b[^>]*class="mast"[^>]*>)/, '<a href="#main" class="audit-button audit-skip">Skip to main content</a>$1');
+      const mainNav = content.navigation.filter(link => link.visible && !targetHidden(link.href, content));
+      html = html.replace(/(<nav\b[^>]*id="main-nav"[^>]*>)[\s\S]*?(<\/nav>)/, (_tag, open, close) =>
+        open + mainNav.map(link => `<a href="${escapeHTML(link.href)}"${pagePath(link.href) === page.path ? ' aria-current="page"' : ''}${link.href === '/contact/' ? ' class="nav-contact"' : ''}>${escapeHTML(link.label)}</a>`).join('') + close);
+      html = html.replace(/href="\/#about"/g, 'href="/about/"');
+      html = html.replace(/(<footer\b[^>]*class="shell footer"[^>]*>[\s\S]*?<\/footer>)/, footer => {
+        const settings = content.settings;
+        const phone = settings.phone && /^\+?[0-9(). -]{6,25}$/.test(settings.phoneLink || '')
+          ? `<br>Call <a href="tel:${escapeHTML(settings.phoneLink)}">${escapeHTML(settings.phone)}</a>` : '';
+        return footer.replace('href="/#worldwide"', 'href="/about/"')
+          .replace(/<p class="footer-contact"[^>]*>[\s\S]*?<\/p>/, () => `<p class="footer-contact"><a aria-label="Email ${escapeHTML(settings.siteName)}" href="mailto:${escapeHTML(settings.email)}">${escapeHTML(settings.email)}</a>${phone}</p>`)
+          .replace(/(<div class="footer-bottom"><span\b[^>]*>)[\s\S]*?(<\/span>)/, (_all, open, close) => open + escapeHTML(settings.copyright) + close);
+      });
+      const extras = `<div class="audit-footer-extra"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/accessibility/">Accessibility</a>
+        ${externalLink(content.settings.bookingUrl) ? `<a href="${escapeHTML(externalLink(content.settings.bookingUrl))}">Book a call</a>` : '<a href="/contact/#contact-call">Request a call</a>'}
+        ${externalLink(content.settings.whatsappUrl) ? `<a href="${escapeHTML(externalLink(content.settings.whatsappUrl))}" data-analytics="whatsapp">WhatsApp</a>` : ''}</div>${socialLinks(content.settings)}`;
+      html = html.replace(/(<div\b[^>]*class="footer-bottom"[^>]*>)/, (_tag, footer) => extras + footer);
       if(!html.includes('/cms/studio.css'))html=html.replace('</head>','<link rel="stylesheet" href="/cms/studio.css"></head>');
       const escape = value => String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
       // Apply the saved palette before the first paint, without waiting for /api/site.
@@ -165,7 +236,7 @@ export async function createCMS({ root, dataDirectory, cookieName = 'endcap_admi
         const contrast = luminance > .179 ? '#181a17' : '#ffffff';
         const name = content.settings.siteName;
         const letters = [...name].map((letter,index) => `<span class="webly-intro-letter" style="--letter-index:${index}">${escape(letter)}</span>`).join('');
-        const intro = `<section class="webly-intro" aria-label="${escape(name)} introduction" style="--intro-primary:${accent};--intro-contrast:${contrast}"><div class="webly-intro-top"><span>Web &amp; AI Studio</span><button class="webly-intro-skip" type="button">Skip intro ↗</button></div><div class="webly-intro-center"><div class="webly-intro-word" aria-label="${escape(name)}"><span aria-hidden="true">${letters}<span class="webly-intro-period">.</span></span></div><p class="webly-intro-caption">Thoughtfully designed. Carefully built.</p></div><div class="webly-intro-bottom"><i class="webly-intro-track" aria-hidden="true"></i><i class="webly-intro-progress" aria-hidden="true"></i><span>Ideas into experiences.</span><span>${escape(name)} studio © ${new Date().getFullYear()}</span></div></section>`;
+        const intro = `<section class="webly-intro" aria-label="${escape(name)} introduction" style="--intro-primary:${accent};--intro-contrast:${contrast}"><div class="webly-intro-top"><span>${escape(content.settings.tagline)}</span><button class="webly-intro-skip" type="button">Skip intro</button></div><div class="webly-intro-center"><div class="webly-intro-word" aria-label="${escape(name)}"><span aria-hidden="true">${letters}<span class="webly-intro-period">.</span></span></div><p class="webly-intro-caption">Websites for businesses and events.</p></div><div class="webly-intro-bottom"><i class="webly-intro-track" aria-hidden="true"></i><i class="webly-intro-progress" aria-hidden="true"></i><span>From brief to launch</span><span>${escape(name)}</span></div></section>`;
         html = html.replace('</head>', `<meta name="webly-intro" content="${escape(name + ':' + accent)}"><link rel="stylesheet" href="/cms/intro.css"><script src="/cms/intro.js"></script></head>`);
         html = html.replace(/<body\b[^>]*>/i, tag => tag + intro);
       }
@@ -174,8 +245,20 @@ export async function createCMS({ root, dataDirectory, cookieName = 'endcap_admi
         let value;
         if (/(?:name|property)=["'](?:description|og:description|twitter:description)["']/i.test(tag)) value=page.description;
         else if (/(?:name|property)=["'](?:og:title|twitter:title)["']/i.test(tag)) value=page.title;
+        else if (/(?:name|property)=["']og:site_name["']/i.test(tag)) value=content.settings.siteName;
+        else if (/(?:name|property)=["']og:url["']/i.test(tag)) value=publicOrigin ? new URL(page.path, publicOrigin).href : page.path;
+        else if (/(?:name|property)=["'](?:og:image|twitter:image)["']/i.test(tag)) {
+          const known = ['quality-kitchen','nura','prompt-pop','talent-hunt'].includes(page.project?.id);
+          const image = '/media/brand/share-' + (known ? page.project.id : 'webly') + '.jpg';
+          value = publicOrigin ? new URL(image, publicOrigin).href : image;
+        }
+        else if (/(?:name|property)=["']og:image:type["']/i.test(tag)) value='image/jpeg';
+        else if (/(?:name|property)=["'](?:og:image:alt|twitter:image:alt)["']/i.test(tag)) value=page.project ? page.project.name + ' case study · Webly' : 'Webly · Web design and development';
         return value === undefined ? tag : tag.replace(/content=(["'])[\s\S]*?\1/i,()=>`content="${escape(value)}"`);
       });
+      if (process.env.WEBLY_PUBLIC_INDEXING === '1' && !url.searchParams.has('preview')) {
+        html = html.replace(/<meta\b[^>]*name=["']robots["'][^>]*>/gi, '');
+      }
       html=html.replace(/<a\b[^>]*\bhref=(["'])(.*?)\1[^>]*>/gi,(tag,quote,href)=>{
         const project=content.projects.find(p=>p.url===href);
         if(!project||page.project)return tag;
@@ -189,9 +272,11 @@ export async function createCMS({ root, dataDirectory, cookieName = 'endcap_admi
     async handle(request, response, url) {
       if(storage){const token=tokenFrom(request);if(token){const entry=await storage.read('sessions/'+token+'.json',null);if(entry&&entry.credentialVersion===admin?.hash)sessions.set(token,entry);}}
       if (!url.pathname.startsWith('/api/')) return false;
+      const route = url.pathname;
+      const nativeForm = route === '/api/inquiries' && request.method === 'POST'
+        && /^application\/x-www-form-urlencoded(?:;|$)/i.test(request.headers['content-type'] || '');
       try {
-        sameOrigin(request);
-        const route = url.pathname;
+        sameOrigin(request, nativeForm);
         if (route === '/api/site' && request.method === 'GET') {
           const content = state.published;
           const data=snapshot(content,url.searchParams.get('path'));
@@ -221,17 +306,44 @@ export async function createCMS({ root, dataDirectory, cookieName = 'endcap_admi
           await issueSession(response); return json(response, 200, { authenticated: true }), true;
         }
         if (route === '/api/inquiries' && request.method === 'POST') {
-          const data = await payload(request);
-          if (data.website) return json(response, 200, { received: true }), true;
+          const data = nativeForm
+            ? Object.fromEntries(new URLSearchParams((await body(request, 32 * 1024)).toString()))
+            : await payload(request, 32 * 1024);
+          if (!data || typeof data !== 'object' || Array.isArray(data)) throw problem(400, 'Enter your project details and try again.');
+          const confirm = (id) => nativeForm
+            ? enquiryResponse(response, 201, 'Enquiry received', 'Thanks. We received your enquiry and will reply by email.')
+            : json(response, id ? 201 : 200, { received: true, ...(id ? { id } : {}) });
+          if (data.website) return confirm(), true;
           const key = createHash('sha256').update(String(request.headers['x-forwarded-for'] || request.socket.remoteAddress)).digest('hex');
           const counterFile='inquiry-limits/'+key+'.json';
           const hits = ((storage ? await storage.read(counterFile,[]) : inquiryLimits.get(key)) || []).filter(t => t > Date.now() - 3600000);
           if (hits.length >= 10) throw problem(429, 'Please try again later.');
           if (!text(data.name).trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(text(data.email)) || !text(data.message).trim()) throw problem(400, 'Please include your name, email and message.');
+          const fields = {};
+          if (nativeForm || data.formVersion === '2') {
+            if (data.consent !== 'yes') throw problem(400, 'Please agree to the privacy policy before sending your enquiry.');
+            for (const key of Object.keys(contactOptions)) {
+              const option = contactOptions[key].find(([value]) => value === data[key]);
+              if (!option) throw problem(400, 'Choose a project type, budget range, and timeline.');
+              fields[key] = option[1];
+            }
+            fields.whatsapp = text(data.whatsapp, 40).trim();
+            fields.callTime = text(data.callTime, 120).trim();
+            fields.website = safeURL(data.site, { optional: true, webOnly: true, label: 'Existing website' });
+            fields.consent = true;
+          }
           hits.push(Date.now()); inquiryLimits.set(key, hits); if(storage)await storage.write(counterFile,hits);
-          const inquiry = { id: randomBytes(12).toString('hex'), name: text(data.name, 150), email: text(data.email, 250), message: text(data.message, 10000), interest: text(data.interest, 150), source: text(data.source, 500), status: 'new', notes: '', createdAt: new Date().toISOString() };
-          await mutate(() => { state.inquiries.unshift(inquiry); log('New inquiry', inquiry.name); });
-          return json(response, 201, { received: true, id: inquiry.id }), true;
+          const inquiry = { id: randomBytes(12).toString('hex'), name: text(data.name, 150).trim(), email: text(data.email, 250).trim(), message: text(data.message, 10000).trim(), interest: text(data.interest, 150), source: text(data.source, 500) || '/contact/', status: 'new', notes: '', createdAt: new Date().toISOString(), ...fields };
+          await mutate(() => { state.inquiries.unshift(inquiry); countEvent('enquiries'); log('New inquiry', inquiry.name); });
+          await deliverEnquiryMail(inquiry);
+          return confirm(inquiry.id), true;
+        }
+        if (route === '/api/site-events' && request.method === 'POST') {
+          const event = await payload(request, 1024);
+          if (event?.event !== 'whatsapp') throw problem(400, 'Unknown site event.');
+          await mutate(() => countEvent('whatsapp'));
+          response.writeHead(204, { 'Cache-Control': 'no-store' }).end();
+          return true;
         }
         if (!session(request)) throw problem(401, 'Sign in to manage the site.');
         if (route === '/api/admin/logout' && request.method === 'POST') { const token=tokenFrom(request); sessions.delete(token); if(storage)await storage.remove('sessions/'+token+'.json'); response.setHeader('Set-Cookie',cookieName+'=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0'+(publicOrigin?'; Secure':'')); return json(response, 200, { success: true }), true; }
@@ -283,7 +395,14 @@ export async function createCMS({ root, dataDirectory, cookieName = 'endcap_admi
           await mutate(() => log('Media uploaded',name)); return json(response,201,{ url:'/media/uploads/'+filename }),true;
         }
         throw problem(404,'Endpoint not found.');
-      } catch (error) { json(response,error.status || 500,{ error:error.status ? error.message : 'Unable to complete the request. Your existing content is preserved.' }); if (!error.status) console.error(error); return true; }
+      } catch (error) {
+        const status = error.status || 500;
+        const message = error.status ? error.message : 'Unable to complete the request. Please try again.';
+        if (nativeForm) enquiryResponse(response, status, 'Enquiry could not be sent', message);
+        else json(response, status, { error: message });
+        if (!error.status) console.error(error);
+        return true;
+      }
     }
   };
 }
